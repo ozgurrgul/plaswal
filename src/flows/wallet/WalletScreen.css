@@ -1,0 +1,13 @@
+.wallet-screen {
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+}
+
+.wallet-screen-coins-list {
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--standard-border-radius);
+  background-color: var(--accent-bg);
+  border: 1px solid var(--border);
+}
