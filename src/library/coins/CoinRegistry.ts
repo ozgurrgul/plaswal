@@ -1,38 +1,63 @@
 import type {
   BaseCoinPlugin,
+  BaseTokenPlugin,
   CoinRegistry as ICoinRegistry,
   SupportedCoinSymbol,
 } from "./types";
 
 class CoinRegistryImpl implements ICoinRegistry {
-  private plugins = new Map<SupportedCoinSymbol, BaseCoinPlugin>();
+  private coinPlugins = new Map<SupportedCoinSymbol, BaseCoinPlugin>();
+  private tokenPlugins = new Map<string, BaseTokenPlugin>();
 
   register(plugin: BaseCoinPlugin): void {
-    this.plugins.set(plugin.metadata.symbol, plugin);
+    this.coinPlugins.set(plugin.metadata.symbol, plugin);
+  }
+
+  registerToken(plugin: BaseTokenPlugin): void {
+    this.tokenPlugins.set(plugin.metadata.symbol, plugin);
   }
 
   getCoin(symbol: SupportedCoinSymbol): BaseCoinPlugin | undefined {
-    return this.plugins.get(symbol);
+    return this.coinPlugins.get(symbol);
+  }
+
+  getToken(symbol: string): BaseTokenPlugin | undefined {
+    return this.tokenPlugins.get(symbol);
   }
 
   getAllCoins(): BaseCoinPlugin[] {
-    return Array.from(this.plugins.values());
+    return Array.from(this.coinPlugins.values());
   }
 
-  getSupportedSymbols(): SupportedCoinSymbol[] {
-    return Array.from(this.plugins.keys());
+  getAllTokens(): BaseTokenPlugin[] {
+    return Array.from(this.tokenPlugins.values());
   }
 
-  isSupported(symbol: SupportedCoinSymbol): boolean {
-    return this.plugins.has(symbol);
+  getTokensByParentCoin(parentCoin: SupportedCoinSymbol): BaseTokenPlugin[] {
+    return Array.from(this.tokenPlugins.values()).filter(
+      (token) => token.parentCoin === parentCoin
+    );
+  }
+
+  getSupportedTokenSymbols(): string[] {
+    return Array.from(this.tokenPlugins.keys());
+  }
+
+  isTokenSupported(symbol: string): boolean {
+    return this.tokenPlugins.has(symbol);
   }
 
   count(): number {
-    return this.plugins.size;
+    return this.coinPlugins.size;
+  }
+
+  tokenCount(): number {
+    return this.tokenPlugins.size;
   }
 
   clear(): void {
-    this.plugins.clear();
+    this.coinPlugins.clear();
+    this.tokenPlugins.clear();
   }
 }
 

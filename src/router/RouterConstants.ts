@@ -1,4 +1,4 @@
 export const ROUTES = {
-  HOME: "/",
-  ABOUT: "/about",
+  WALLET: "/",
+  WALLET_DETAIL: "/wallet/:coinSymbol",
 } as const;

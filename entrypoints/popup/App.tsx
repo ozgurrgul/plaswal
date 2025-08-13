@@ -2,7 +2,8 @@ import { ROUTES } from "@/src/router/RouterConstants";
 import { HashRouter, Route, Routes } from "react-router";
 import { useEffect } from "react";
 import { useIsOnboarded } from "@/src/library/walletCore/hooks/useIsOnboarded";
-import { HomeScreen } from "@/src/flows/home/HomeScreen";
+import { WalletScreen } from "@/src/flows/wallet/WalletScreen";
+import { WalletDetailScreen } from "@/src/flows/wallet/WalletDetailScreen";
 
 function App() {
   const isOnboarded = useIsOnboarded();
@@ -21,8 +22,8 @@ function App() {
     <>
       <HashRouter>
         <Routes>
-          <Route path={ROUTES.HOME} element={<HomeScreen />} />
-          <Route path={ROUTES.ABOUT} element={<div>About</div>} />
+          <Route path={ROUTES.WALLET} element={<WalletScreen />} />
+          <Route path={ROUTES.WALLET_DETAIL} element={<WalletDetailScreen />} />
         </Routes>
       </HashRouter>
     </>

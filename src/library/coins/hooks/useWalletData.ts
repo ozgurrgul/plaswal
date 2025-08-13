@@ -14,7 +14,7 @@ export const useWalletData = () => {
   );
 
   return useQuery({
-    queryKey: ["wallet-addresses"],
+    queryKey: ["walletData"],
     queryFn: async () => {
       if (!walletCore) {
         throw new Error("WalletCore not initialized");
@@ -31,12 +31,12 @@ export const useWalletData = () => {
       const hdWallet = walletCore.HDWallet.createWithMnemonic(mnemonic, "");
       const allCoins = getAllCoins();
 
-      const addresses: WalletData = {} as WalletData;
+      const walletData: Partial<WalletData> = {};
 
       for (const coin of allCoins) {
         try {
           const address = coin.getAddress(walletCore, hdWallet);
-          addresses[coin.metadata.symbol] = {
+          walletData[coin.metadata.symbol] = {
             address,
             balance: coin.getBalance ? await coin.getBalance(address) : "0",
           };
@@ -48,9 +48,7 @@ export const useWalletData = () => {
         }
       }
 
-      return {
-        addresses,
-      };
+      return walletData;
     },
     enabled: !!walletCore && !!mnemonic && isSetup,
   });
