@@ -1,6 +1,6 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 
-import { WalletCoreProvider } from "./WalletCoreProvider"
+import { WalletCoreProvider } from "../library/walletCore/WalletCoreProvider"
 
 const queryClient = new QueryClient()
 

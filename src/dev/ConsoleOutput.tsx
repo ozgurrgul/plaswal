@@ -12,7 +12,7 @@ export const ConsoleOutput = () => {
   const [logs, setLogs] = useState<LogEntry[]>([]);
   const [filter, setFilter] = useState<string>("");
   const [levelFilter, setLevelFilter] = useState<string>("all");
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(true);
   const logIdRef = useRef(0);
   const containerRef = useRef<HTMLDivElement>(null);
 

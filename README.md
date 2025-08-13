@@ -1,3 +1,7 @@
 # WXT + React
 
-This template should help get you started developing with React in WXT.
+Example dummy mnemonic:
+
+```
+shaft forum frame tortoise annual solid employ surge judge rotate code fly
+```
