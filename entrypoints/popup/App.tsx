@@ -3,7 +3,7 @@ import { HashRouter, Route, Routes } from "react-router";
 import { useEffect } from "react";
 import { useIsOnboarded } from "@/src/library/walletCore/hooks/useIsOnboarded";
 import { WalletScreen } from "@/src/flows/wallet/WalletScreen";
-import { WalletDetailScreen } from "@/src/flows/wallet/WalletDetailScreen";
+import { WalletDetailScreen } from "@/src/flows/wallet/walletDetail/WalletDetailScreen";
 
 function App() {
   const isOnboarded = useIsOnboarded();

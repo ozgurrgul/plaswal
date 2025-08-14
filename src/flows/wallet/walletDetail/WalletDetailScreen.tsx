@@ -7,6 +7,9 @@ import { CopyIcon } from "@/src/ui/components/CopyIcon";
 import { SupportedCoinOrTokenSymbol } from "@/src/library/coins/types";
 import { QrCodeIcon } from "@/src/ui/components/Icons";
 import { useCoinOrToken } from "@/src/library/coins/hooks/useCoinOrToken";
+import { CustomDrawer } from "@/src/ui/components/Drawer";
+import { WalletDetailReceive } from "./WalletDetailReceive";
+import { useCopyText } from "@/src/hooks/useCopyText";
 
 export const WalletDetailScreen = () => {
   const { coinSymbol } = useParams() as {
@@ -14,7 +17,7 @@ export const WalletDetailScreen = () => {
   };
   const walletData = useWalletDataByCoin(coinSymbol);
   const coinOrToken = useCoinOrToken(coinSymbol);
-  const [copySuccess, setCopySuccess] = useState(false);
+  const { copySuccess, handleCopyText } = useCopyText();
 
   if (!walletData || !coinOrToken) {
     return null;
@@ -22,16 +25,6 @@ export const WalletDetailScreen = () => {
 
   const { balance, address } = walletData;
   const balanceFiat = "133$"; // dummy for now
-
-  const handleCopyAddress = async () => {
-    try {
-      await navigator.clipboard.writeText(address);
-      setCopySuccess(true);
-      setTimeout(() => setCopySuccess(false), 2000);
-    } catch (err) {
-      console.error("Failed to copy address:", err);
-    }
-  };
 
   return (
     <>
@@ -60,9 +53,25 @@ export const WalletDetailScreen = () => {
             <div className="wallet-detail-address-label">Address</div>
             <div className="wallet-detail-address-container">
               <div className="wallet-detail-address">{address}</div>
-              <CopyIcon onClick={handleCopyAddress} isCopied={copySuccess} />
+              <CopyIcon
+                onClick={() => handleCopyText(address)}
+                isCopied={copySuccess}
+              />
             </div>
           </div>
+        </div>
+        <div className="wallet-detail-actions">
+          <button>Send</button>
+
+          <CustomDrawer
+            trigger={<button>Receive</button>}
+            title="Receive Crypto"
+            description={`Share your ${coinOrToken.metadata.symbol} address`}
+          >
+            <WalletDetailReceive address={address} />
+          </CustomDrawer>
+
+          <button>Swap</button>
         </div>
       </div>
     </>
