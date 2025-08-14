@@ -1,4 +1,4 @@
-import { useQueries } from "@tanstack/react-query";
+import { QueryOptions, useQueries } from "@tanstack/react-query";
 import { useWalletCore } from "@/src/library/walletCore/WalletCoreProvider";
 import { usePersistenceValue } from "@/src/hooks/usePersistenceValue";
 import { PERSISTENCE_KEYS } from "@/src/constants/PersistenceKeys";
@@ -30,35 +30,39 @@ export const useWalletData = () => {
     const allCoins = getAllCoins();
     const allTokens = getAllTokens();
 
-    const coinQueries = allCoins.map((coin: BaseCoinPlugin) => ({
-      queryKey: ["walletData", coin.metadata.symbol, "coin"],
-      queryFn: async (): Promise<WalletItem> => {
-        const address = coin.getAddress(walletCore, hdWallet);
-        const balance = await coin.getBalance(address);
-        return {
-          symbol: coin.metadata.symbol,
-          address,
-          balance,
-          isNative: true,
-        };
-      },
-      enabled: true,
-    }));
+    const coinQueries = allCoins.map(
+      (coin: BaseCoinPlugin) =>
+        ({
+          queryKey: ["walletData", coin.metadata.symbol, "coin"],
+          queryFn: async (): Promise<WalletItem> => {
+            const address = coin.getAddress(walletCore, hdWallet);
+            const balance = await coin.getBalance(address);
+            return {
+              symbol: coin.metadata.symbol,
+              address,
+              balance,
+              isNative: true,
+            };
+          },
+        } satisfies QueryOptions)
+    );
 
-    const tokenQueries = allTokens.map((token: BaseTokenPlugin) => ({
-      queryKey: ["walletData", token.metadata.symbol, "token"],
-      queryFn: async (): Promise<WalletItem> => {
-        const address = token.getAddress(walletCore, hdWallet);
-        const balance = await token.getBalance(address);
-        return {
-          symbol: token.metadata.symbol,
-          address,
-          balance,
-          isNative: false,
-        };
-      },
-      enabled: true,
-    }));
+    const tokenQueries = allTokens.map(
+      (token: BaseTokenPlugin) =>
+        ({
+          queryKey: ["walletData", token.metadata.symbol, "token"],
+          queryFn: async (): Promise<WalletItem> => {
+            const address = token.getAddress(walletCore, hdWallet);
+            const balance = await token.getBalance(address);
+            return {
+              symbol: token.metadata.symbol,
+              address,
+              balance,
+              isNative: false,
+            };
+          },
+        } satisfies QueryOptions)
+    );
 
     return [...coinQueries, ...tokenQueries];
   }, [walletCore, mnemonic, isSetup, getAllCoins, getAllTokens]);
