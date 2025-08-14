@@ -1,51 +1,22 @@
-import { SupportedCoinSymbol } from "@/src/library/coins";
-import { useCoin } from "@/src/library/coins/hooks/useCoin";
 import { useWalletDataByCoin } from "@/src/library/coins/hooks/useuseWalletDataByCoin";
 import { useParams } from "react-router";
 import { Header } from "@/src/ui/components/Header";
 import { useState } from "react";
 import "./WalletDetailScreen.css";
 import { CopyIcon } from "@/src/ui/components/CopyIcon";
-
-const qrCodeIcon = () => {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      className="lucide lucide-qr-code-icon lucide-qr-code"
-    >
-      <rect width="5" height="5" x="3" y="3" rx="1" />
-      <rect width="5" height="5" x="16" y="3" rx="1" />
-      <rect width="5" height="5" x="3" y="16" rx="1" />
-      <path d="M21 16h-3a2 2 0 0 0-2 2v3" />
-      <path d="M21 21v.01" />
-      <path d="M12 7v3a2 2 0 0 1-2 2H7" />
-      <path d="M3 12h.01" />
-      <path d="M12 3h.01" />
-      <path d="M12 16v.01" />
-      <path d="M16 12h1" />
-      <path d="M21 12v.01" />
-      <path d="M12 21v-1" />
-    </svg>
-  );
-};
+import { SupportedCoinOrTokenSymbol } from "@/src/library/coins/types";
+import { QrCodeIcon } from "@/src/ui/components/Icons";
+import { useCoinOrToken } from "@/src/library/coins/hooks/useCoinOrToken";
 
 export const WalletDetailScreen = () => {
   const { coinSymbol } = useParams() as {
-    coinSymbol: SupportedCoinSymbol;
+    coinSymbol: SupportedCoinOrTokenSymbol;
   };
   const walletData = useWalletDataByCoin(coinSymbol);
-  const coin = useCoin(coinSymbol);
+  const coinOrToken = useCoinOrToken(coinSymbol);
   const [copySuccess, setCopySuccess] = useState(false);
 
-  if (!walletData || !coin) {
+  if (!walletData || !coinOrToken) {
     return null;
   }
 
@@ -64,21 +35,23 @@ export const WalletDetailScreen = () => {
 
   return (
     <>
-      <Header title={`${coin.metadata.name} Wallet`} />
+      <Header title={`${coinOrToken.metadata.name} Wallet`} />
 
       <div className="wallet-detail-screen">
         <div className="wallet-detail-main-info">
           <div className="wallet-detail-coin-header">
-            {coin.metadata.iconUrl && (
-              <img src={coin.metadata.iconUrl} alt={coin.metadata.name} />
+            {coinOrToken.metadata.iconUrl && (
+              <img src={coinOrToken.metadata.iconUrl} />
             )}
-            <div className="wallet-detail-coin-name">{coin.metadata.name}</div>
-            {qrCodeIcon()}
+            <div className="wallet-detail-coin-name">
+              {coinOrToken.metadata.name}
+            </div>
+            <QrCodeIcon />
           </div>
 
           <div className="wallet-detail-balance-section">
             <div className="wallet-detail-balance">
-              {balance} {coin.metadata.symbol}
+              {balance} {coinOrToken.metadata.symbol}
             </div>
             <div className="wallet-detail-balance-fiat">{balanceFiat}</div>
           </div>

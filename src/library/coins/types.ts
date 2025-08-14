@@ -3,6 +3,9 @@ import { HDWallet } from "@trustwallet/wallet-core/dist/src/wallet-core";
 
 export type SupportedCoinSymbol = "BTC" | "ETH" | "SOL";
 export type SupportedTokenSymbol = string;
+export type SupportedCoinOrTokenSymbol =
+  | SupportedCoinSymbol
+  | SupportedTokenSymbol;
 
 export interface CoinMetadata {
   symbol: SupportedCoinSymbol;
@@ -69,7 +72,7 @@ export type WalletItemType = {
 };
 
 export type WalletData = Record<
-  SupportedCoinSymbol | SupportedTokenSymbol,
+  SupportedCoinOrTokenSymbol,
   {
     isNative: boolean;
     address: string;
