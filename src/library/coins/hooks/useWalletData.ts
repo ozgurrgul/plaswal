@@ -32,8 +32,6 @@ export const useWalletData = () => {
       const allCoins = getAllCoins();
       const allTokens = getAllTokens();
 
-      console.log({ allCoins });
-
       const walletData: Partial<WalletData> = {};
 
       for (const coin of allCoins) {

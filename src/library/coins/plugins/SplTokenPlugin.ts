@@ -2,6 +2,11 @@ import type { WalletCore } from "@trustwallet/wallet-core";
 import type { BaseTokenPlugin, TokenMetadata } from "../types";
 import { HDWallet } from "@trustwallet/wallet-core/dist/src/wallet-core";
 import { SolanaPlugin } from "./SolanaPlugin";
+import { address as addressCtor, createSolanaRpc } from "@solana/kit";
+
+const rpc = createSolanaRpc(
+  "https://go.getblock.us/86aac42ad4484f3c813079afc201451c"
+);
 
 export class SplTokenPlugin implements BaseTokenPlugin {
   readonly metadata: TokenMetadata;
@@ -23,7 +28,29 @@ export class SplTokenPlugin implements BaseTokenPlugin {
   }
 
   async getBalance(address: string): Promise<string> {
-    return "0.0";
+    try {
+      const tokenAccount = await rpc
+        .getTokenAccountsByOwner(
+          addressCtor(address),
+          {
+            mint: addressCtor(this.metadata.contractAddress),
+          },
+          { encoding: "jsonParsed" }
+        )
+        .send();
+
+      if (tokenAccount.value.length === 0) {
+        return "0";
+      }
+
+      return (
+        tokenAccount.value[0].account.data.parsed.info.tokenAmount
+          .uiAmountString || "0"
+      );
+    } catch (error) {
+      console.error("Error fetching SPL token balance:", error);
+      return "0";
+    }
   }
 
   async sendTransaction(

@@ -1,6 +1,11 @@
 import type { WalletCore } from "@trustwallet/wallet-core";
 import type { BaseCoinPlugin, CoinMetadata, TokenMetadata } from "../types";
 import { HDWallet } from "@trustwallet/wallet-core/dist/src/wallet-core";
+import { address as addressCtor, createSolanaRpc } from "@solana/kit";
+
+const rpc = createSolanaRpc(
+  "https://go.getblock.us/86aac42ad4484f3c813079afc201451c"
+);
 
 export class SolanaPlugin implements BaseCoinPlugin {
   readonly metadata: CoinMetadata = {
@@ -22,7 +27,14 @@ export class SolanaPlugin implements BaseCoinPlugin {
   }
 
   async getBalance(address: string): Promise<string> {
-    return "0.0";
+    try {
+      const tokenAccountAddress = addressCtor(address);
+      const balance = await rpc.getBalance(tokenAccountAddress).send();
+      return balance.value.toString() || "0";
+    } catch (error) {
+      console.error("Error fetching SOL balance:", error);
+      return "0";
+    }
   }
 
   async sendTransaction(
@@ -38,30 +50,12 @@ export class SolanaPlugin implements BaseCoinPlugin {
   getKnownTokenMetadata(): TokenMetadata[] {
     return [
       {
-        symbol: "USDC",
-        name: "USD Coin (SPL)",
+        symbol: "JUP",
+        name: "Jupiter",
         decimals: 6,
-        contractAddress: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+        contractAddress: "JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN",
         iconUrl:
-          "https://assets.coingecko.com/coins/images/6319/standard/USD_Coin_icon.png",
-        isNative: false,
-      },
-      {
-        symbol: "USDT",
-        name: "Tether USD (SPL)",
-        decimals: 6,
-        contractAddress: "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB",
-        iconUrl:
-          "https://assets.coingecko.com/coins/images/325/standard/Tether.png",
-        isNative: false,
-      },
-      {
-        symbol: "RAY",
-        name: "Raydium",
-        decimals: 6,
-        contractAddress: "4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R",
-        iconUrl:
-          "https://assets.coingecko.com/coins/images/13928/standard/PSigc4Zl_400x400.jpg",
+          "https://assets.coingecko.com/coins/images/34188/standard/jup.png?1704266489",
         isNative: false,
       },
     ];
