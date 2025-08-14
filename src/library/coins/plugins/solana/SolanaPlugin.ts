@@ -1,11 +1,8 @@
 import type { WalletCore } from "@trustwallet/wallet-core";
-import type { BaseCoinPlugin, CoinMetadata, TokenMetadata } from "../types";
+import type { BaseCoinPlugin, CoinMetadata, TokenMetadata } from "../../types";
 import { HDWallet } from "@trustwallet/wallet-core/dist/src/wallet-core";
-import { address as addressCtor, createSolanaRpc } from "@solana/kit";
-
-const rpc = createSolanaRpc(
-  "https://go.getblock.us/86aac42ad4484f3c813079afc201451c"
-);
+import { address as addressCtor } from "@solana/kit";
+import { getSolanaRpc } from "./SolanaHelpers";
 
 export class SolanaPlugin implements BaseCoinPlugin {
   readonly metadata: CoinMetadata = {
@@ -29,7 +26,9 @@ export class SolanaPlugin implements BaseCoinPlugin {
   async getBalance(address: string): Promise<string> {
     try {
       const tokenAccountAddress = addressCtor(address);
-      const balance = await rpc.getBalance(tokenAccountAddress).send();
+      const balance = await getSolanaRpc()
+        .getBalance(tokenAccountAddress)
+        .send();
       return balance.value.toString() || "0";
     } catch (error) {
       console.error("Error fetching SOL balance:", error);

@@ -1,12 +1,10 @@
 import type { WalletCore } from "@trustwallet/wallet-core";
-import type { BaseTokenPlugin, TokenMetadata } from "../types";
+
+import type { BaseTokenPlugin, TokenMetadata } from "../../types";
 import { HDWallet } from "@trustwallet/wallet-core/dist/src/wallet-core";
 import { SolanaPlugin } from "./SolanaPlugin";
-import { address as addressCtor, createSolanaRpc } from "@solana/kit";
-
-const rpc = createSolanaRpc(
-  "https://go.getblock.us/86aac42ad4484f3c813079afc201451c"
-);
+import { address as addressCtor } from "@solana/kit";
+import { getSolanaRpc } from "./SolanaHelpers";
 
 export class SplTokenPlugin implements BaseTokenPlugin {
   readonly metadata: TokenMetadata;
@@ -29,7 +27,7 @@ export class SplTokenPlugin implements BaseTokenPlugin {
 
   async getBalance(address: string): Promise<string> {
     try {
-      const tokenAccount = await rpc
+      const tokenAccount = await getSolanaRpc()
         .getTokenAccountsByOwner(
           addressCtor(address),
           {

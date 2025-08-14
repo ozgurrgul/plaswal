@@ -1,8 +1,11 @@
 import type { WalletCore } from "@trustwallet/wallet-core";
-import type { BaseCoinPlugin, CoinMetadata, TokenMetadata } from "../types";
+import type {
+  BaseCoinPlugin,
+  CoinMetadata,
+  TokenMetadata,
+} from "../../../types";
 import { HDWallet } from "@trustwallet/wallet-core/dist/src/wallet-core";
-import { createPublicClient, http } from "viem";
-import { mainnet } from "viem/chains";
+import { getEthereumRpc } from "./EthereumHelpers";
 
 export class EthereumPlugin implements BaseCoinPlugin {
   readonly metadata: CoinMetadata = {
@@ -24,10 +27,7 @@ export class EthereumPlugin implements BaseCoinPlugin {
   }
 
   async getBalance(address: string): Promise<string> {
-    const balance = await createPublicClient({
-      chain: mainnet,
-      transport: http(),
-    }).getBalance({
+    const balance = await getEthereumRpc().getBalance({
       address: address as `0x${string}`,
     });
 

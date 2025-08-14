@@ -3,11 +3,10 @@ import type {
   BaseTokenPlugin,
   SupportedCoinSymbol,
   TokenMetadata,
-} from "../types";
+} from "../../../types";
 import { HDWallet } from "@trustwallet/wallet-core/dist/src/wallet-core";
 import { EthereumPlugin } from "./EthereumPlugin";
-import { createPublicClient, http } from "viem";
-import { mainnet } from "viem/chains";
+import { getEthereumRpc } from "./EthereumHelpers";
 
 export class Erc20Plugin implements BaseTokenPlugin {
   readonly metadata: TokenMetadata;
@@ -28,13 +27,8 @@ export class Erc20Plugin implements BaseTokenPlugin {
   }
 
   async getBalance(address: string): Promise<string> {
-    const client = createPublicClient({
-      chain: mainnet,
-      transport: http(),
-    });
-
     try {
-      const balance = (await client.readContract({
+      const balance = (await getEthereumRpc().readContract({
         address: this.metadata.contractAddress as `0x${string}`,
         abi: [
           {

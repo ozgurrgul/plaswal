@@ -11,8 +11,8 @@ export type {
 export { CoinRegistry } from "./CoinRegistry";
 export { setupCoins, areCoinsSetup } from "./setup";
 
-export { EthereumPlugin } from "./plugins/EthereumPlugin";
-export { SolanaPlugin } from "./plugins/SolanaPlugin";
 export { BitcoinPlugin } from "./plugins/BitcoinPlugin";
-export { Erc20Plugin } from "./plugins/Erc20Plugin";
-export { SplTokenPlugin } from "./plugins/SplTokenPlugin";
+export { EthereumPlugin } from "./plugins/evm/ethereum/EthereumPlugin";
+export { Erc20Plugin } from "./plugins/evm/ethereum/Erc20Plugin";
+export { SolanaPlugin } from "./plugins/solana/SolanaPlugin";
+export { SplTokenPlugin } from "./plugins/solana/SplTokenPlugin";
