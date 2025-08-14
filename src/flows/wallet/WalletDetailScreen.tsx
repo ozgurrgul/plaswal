@@ -1,18 +1,11 @@
 import { SupportedCoinSymbol } from "@/src/library/coins";
 import { useCoin } from "@/src/library/coins/hooks/useCoin";
 import { useWalletDataByCoin } from "@/src/library/coins/hooks/useuseWalletDataByCoin";
-import { useTokenBalance } from "@/src/library/coins/hooks/useTokenBalance";
 import { useParams } from "react-router";
 import { Header } from "@/src/ui/components/Header";
 import { useState } from "react";
-import type { TokenMetadata } from "@/src/library/coins/types";
 import "./WalletDetailScreen.css";
 import { CopyIcon } from "@/src/ui/components/CopyIcon";
-
-interface EnhancedTokenItemProps {
-  token: TokenMetadata;
-  address: string;
-}
 
 const qrCodeIcon = () => {
   return (
@@ -44,40 +37,12 @@ const qrCodeIcon = () => {
   );
 };
 
-const EnhancedWalletDetailTokenItem: React.FC<EnhancedTokenItemProps> = ({
-  token,
-  address,
-}) => {
-  const { data: balance, isLoading } = useTokenBalance(token.symbol, address);
-
-  return (
-    <div className="wallet-detail-token-item">
-      <div className="wallet-detail-token-icon">
-        {token.iconUrl ? (
-          <img src={token.iconUrl} alt={token.symbol} />
-        ) : (
-          token.symbol.charAt(0)
-        )}
-      </div>
-      <div className="wallet-detail-token-content">
-        <div className="wallet-detail-token-info">
-          <div className="wallet-detail-token-symbol">{token.symbol}</div>
-        </div>
-        <div className="wallet-detail-token-balance">
-          {isLoading ? "..." : balance?.balance || "0"} {token.symbol}
-        </div>
-      </div>
-    </div>
-  );
-};
-
 export const WalletDetailScreen = () => {
   const { coinSymbol } = useParams() as {
     coinSymbol: SupportedCoinSymbol;
   };
   const walletData = useWalletDataByCoin(coinSymbol);
   const coin = useCoin(coinSymbol);
-  const tokens = coin?.getKnownTokenMetadata();
   const [copySuccess, setCopySuccess] = useState(false);
 
   if (!walletData || !coin) {
@@ -126,21 +91,6 @@ export const WalletDetailScreen = () => {
             </div>
           </div>
         </div>
-
-        {tokens && tokens.length > 0 && (
-          <div className="wallet-detail-tokens-section">
-            <div className="wallet-detail-tokens-title">Tokens</div>
-            <div className="wallet-detail-tokens-list">
-              {tokens.map((token) => (
-                <EnhancedWalletDetailTokenItem
-                  key={token.symbol}
-                  token={token}
-                  address={walletData.address}
-                />
-              ))}
-            </div>
-          </div>
-        )}
       </div>
     </>
   );

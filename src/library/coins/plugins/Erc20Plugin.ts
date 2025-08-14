@@ -27,7 +27,7 @@ export class Erc20Plugin implements BaseTokenPlugin {
     return this.ethereumPlugin.isValidAddress(walletCore, address);
   }
 
-  async getBalance(address: string, contractAddress: string): Promise<string> {
+  async getBalance(address: string): Promise<string> {
     const client = createPublicClient({
       chain: mainnet,
       transport: http(),
@@ -35,7 +35,7 @@ export class Erc20Plugin implements BaseTokenPlugin {
 
     try {
       const balance = (await client.readContract({
-        address: contractAddress as `0x${string}`,
+        address: this.metadata.contractAddress as `0x${string}`,
         abi: [
           {
             constant: true,

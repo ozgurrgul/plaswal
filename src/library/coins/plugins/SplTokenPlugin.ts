@@ -22,8 +22,8 @@ export class SplTokenPlugin implements BaseTokenPlugin {
     return this.solanaPlugin.isValidAddress(walletCore, address);
   }
 
-  async getBalance(address: string, contractAddress: string): Promise<string> {
-    throw new Error("SPL token balance fetching not implemented yet");
+  async getBalance(address: string): Promise<string> {
+    return "0.0";
   }
 
   async sendTransaction(

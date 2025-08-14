@@ -1,10 +1,10 @@
 import { useAppNavigate } from "@/src/hooks/useAppNavigate";
-import type { WalletItemType } from "@/src/library/coins/types";
+import type { TokenMetadata, WalletItemType } from "@/src/library/coins/types";
 import type { CoinMetadata } from "@/src/library/coins/types";
 import "./WalletItem.css";
 
 interface Props {
-  coin: CoinMetadata;
+  coin: CoinMetadata | TokenMetadata;
   wallet: WalletItemType;
 }
 

@@ -15,10 +15,7 @@ export const useTokenBalance = (
         throw new Error(`Token ${symbol} not found`);
       }
 
-      const balance = await token.getBalance(
-        address,
-        token.metadata.contractAddress
-      );
+      const balance = await token.getBalance(address);
 
       return {
         balance,

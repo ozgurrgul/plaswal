@@ -23,6 +23,7 @@ export function useCoins() {
     getAllCoins: (): BaseCoinPlugin[] => CoinRegistry.getAllCoins(),
     getCoin: (symbol: SupportedCoinSymbol): BaseCoinPlugin | undefined =>
       CoinRegistry.getCoin(symbol),
+    getAllTokens: (): BaseTokenPlugin[] => CoinRegistry.getAllTokens(),
     getToken: (symbol: string): BaseTokenPlugin | undefined =>
       CoinRegistry.getToken(symbol),
     isSetup,

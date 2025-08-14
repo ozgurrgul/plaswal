@@ -7,7 +7,7 @@ import type { WalletData } from "../types";
 
 export const useWalletData = () => {
   const walletCore = useWalletCore();
-  const { getAllCoins, isSetup } = useCoins();
+  const { getAllCoins, getAllTokens, isSetup } = useCoins();
   const mnemonic = usePersistenceValue<string>(
     PERSISTENCE_KEYS.WALLET_MNEMONIC,
     undefined
@@ -30,6 +30,9 @@ export const useWalletData = () => {
 
       const hdWallet = walletCore.HDWallet.createWithMnemonic(mnemonic, "");
       const allCoins = getAllCoins();
+      const allTokens = getAllTokens();
+
+      console.log({ allCoins });
 
       const walletData: Partial<WalletData> = {};
 
@@ -38,11 +41,28 @@ export const useWalletData = () => {
           const address = coin.getAddress(walletCore, hdWallet);
           walletData[coin.metadata.symbol] = {
             address,
-            balance: coin.getBalance ? await coin.getBalance(address) : "0",
+            balance: await coin.getBalance(address),
+            isNative: true,
           };
         } catch (error) {
           console.error(
             `Failed to get address for ${coin.metadata.symbol}:`,
+            error
+          );
+        }
+      }
+
+      for (const token of allTokens) {
+        try {
+          const address = token.getAddress(walletCore, hdWallet);
+          walletData[token.metadata.symbol] = {
+            address,
+            balance: await token.getBalance(address),
+            isNative: false,
+          };
+        } catch (error) {
+          console.error(
+            `Failed to get address for ${token.metadata.symbol}:`,
             error
           );
         }
