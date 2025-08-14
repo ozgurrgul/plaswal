@@ -5,13 +5,14 @@ import { Header } from "@/src/ui/components/Header";
 import "./WalletScreen.css";
 import { SupportedCoinSymbol, WalletData } from "@/src/library/coins";
 import { SupportedTokenSymbol } from "@/src/library/coins/types";
+import { LoadingBig } from "@/src/ui/components/Loading";
 
 export const WalletScreen = () => {
   const { getCoin, getToken } = useCoins();
   const { data: walletData, isLoading, error } = useWalletData();
 
   if (isLoading) {
-    return <div>Loading wallet...</div>;
+    return <LoadingBig />;
   }
 
   if (error) {
