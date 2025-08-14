@@ -28,12 +28,11 @@ export interface BaseCoinPlugin {
   getAddress(walletCore: WalletCore, hdWallet: HDWallet): string;
   isValidAddress(walletCore: WalletCore, address: string): boolean;
   getBalance(address: string): Promise<string>;
-  sendTransaction?(
+  sendTransaction(
     walletCore: WalletCore,
     from: string,
     to: string,
-    amount: string,
-    privateKey: string
+    amount: string
   ): Promise<string>;
   getKnownTokenMetadata(): TokenMetadata[];
 }
@@ -45,15 +44,10 @@ export interface BaseTokenPlugin {
   getAddress: BaseCoinPlugin["getAddress"];
   isValidAddress: BaseCoinPlugin["isValidAddress"];
   getBalance(address: string): Promise<string>;
-  sendTransaction?(
-    walletCore: WalletCore,
-    from: string,
-    to: string,
-    amount: string,
-    contractAddress: string,
-    privateKey: string
-  ): Promise<string>;
+  sendTransaction: BaseCoinPlugin["sendTransaction"];
 }
+
+export type CoinOrTokenPlugin = BaseCoinPlugin | BaseTokenPlugin;
 
 export interface CoinRegistry {
   register(plugin: BaseCoinPlugin): void;

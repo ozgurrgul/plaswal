@@ -4,12 +4,14 @@ interface Props<T extends string> {
   step: T;
   steps: Record<T, React.ReactNode>;
   setStep: (step: T) => void;
+  hideBackButton?: boolean;
 }
 
 export const Stepper = <T extends string>({
   step,
   steps,
   setStep,
+  hideBackButton = false,
 }: Props<T>) => {
   const stepHistory = useRef<T[]>([]);
   const [canGoBack, setCanGoBack] = useState(false);
@@ -37,9 +39,11 @@ export const Stepper = <T extends string>({
 
   return (
     <div>
-      <button onClick={handleBack} disabled={!canGoBack}>
-        back
-      </button>
+      {!hideBackButton && (
+        <button onClick={handleBack} disabled={!canGoBack}>
+          back
+        </button>
+      )}
       <div>{steps[step]}</div>
     </div>
   );

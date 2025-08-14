@@ -38,8 +38,7 @@ export class EthereumPlugin implements BaseCoinPlugin {
     walletCore: WalletCore,
     from: string,
     to: string,
-    amount: string,
-    privateKey: string
+    amount: string
   ): Promise<string> {
     throw new Error("Ethereum transaction sending not implemented yet");
   }

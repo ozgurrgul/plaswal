@@ -40,8 +40,7 @@ export class SolanaPlugin implements BaseCoinPlugin {
     walletCore: WalletCore,
     from: string,
     to: string,
-    amount: string,
-    privateKey: string
+    amount: string
   ): Promise<string> {
     throw new Error("Solana transaction sending not implemented yet");
   }

@@ -53,9 +53,7 @@ export class Erc20Plugin implements BaseTokenPlugin {
     walletCore: WalletCore,
     from: string,
     to: string,
-    amount: string,
-    contractAddress: string,
-    privateKey: string
+    amount: string
   ): Promise<string> {
     throw new Error("ERC-20 token transaction sending not implemented yet");
   }

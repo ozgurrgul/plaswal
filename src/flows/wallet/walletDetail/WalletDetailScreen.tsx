@@ -1,7 +1,5 @@
-import { useWalletDataByCoin } from "@/src/library/coins/hooks/useuseWalletDataByCoin";
 import { useParams } from "react-router";
 import { Header } from "@/src/ui/components/Header";
-import { useState } from "react";
 import "./WalletDetailScreen.css";
 import { CopyIcon } from "@/src/ui/components/CopyIcon";
 import { SupportedCoinOrTokenSymbol } from "@/src/library/coins/types";
@@ -10,6 +8,8 @@ import { useCoinOrToken } from "@/src/library/coins/hooks/useCoinOrToken";
 import { CustomDrawer } from "@/src/ui/components/Drawer";
 import { WalletDetailReceive } from "./WalletDetailReceive";
 import { useCopyText } from "@/src/hooks/useCopyText";
+import { WalletDetailSendFlow } from "./send/WalletDetailSendFlow";
+import { useWalletDataByCoin } from "@/src/library/coins/hooks/useWalletDataByCoin";
 
 export const WalletDetailScreen = () => {
   const { coinSymbol } = useParams() as {
@@ -61,7 +61,16 @@ export const WalletDetailScreen = () => {
           </div>
         </div>
         <div className="wallet-detail-actions">
-          <button>Send</button>
+          <CustomDrawer
+            trigger={<button>Send</button>}
+            title="Send Crypto"
+            description={`Send your ${coinOrToken.metadata.symbol} to another address`}
+          >
+            <WalletDetailSendFlow
+              balance={balance}
+              coinSymbol={coinOrToken.metadata.symbol}
+            />
+          </CustomDrawer>
 
           <CustomDrawer
             trigger={<button>Receive</button>}

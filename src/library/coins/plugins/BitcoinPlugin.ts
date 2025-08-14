@@ -28,8 +28,7 @@ export class BitcoinPlugin implements BaseCoinPlugin {
     walletCore: WalletCore,
     from: string,
     to: string,
-    amount: string,
-    privateKey: string
+    amount: string
   ): Promise<string> {
     throw new Error("Bitcoin transaction sending not implemented yet");
   }
