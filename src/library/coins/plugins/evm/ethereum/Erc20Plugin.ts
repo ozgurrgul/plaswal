@@ -7,6 +7,7 @@ import type {
 import { HDWallet } from "@trustwallet/wallet-core/dist/src/wallet-core";
 import { EthereumPlugin } from "./EthereumPlugin";
 import { getEthereumRpc } from "./EthereumHelpers";
+import { erc20Abi } from "viem";
 
 export class Erc20Plugin implements BaseTokenPlugin {
   readonly metadata: TokenMetadata;
@@ -30,15 +31,7 @@ export class Erc20Plugin implements BaseTokenPlugin {
     try {
       const balance = (await getEthereumRpc().readContract({
         address: this.metadata.contractAddress as `0x${string}`,
-        abi: [
-          {
-            constant: true,
-            inputs: [{ name: "_owner", type: "address" }],
-            name: "balanceOf",
-            outputs: [{ name: "balance", type: "uint256" }],
-            type: "function",
-          },
-        ],
+        abi: erc20Abi,
         functionName: "balanceOf",
         args: [address as `0x${string}`],
       })) as bigint;
