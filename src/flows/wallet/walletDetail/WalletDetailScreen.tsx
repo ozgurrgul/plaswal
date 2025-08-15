@@ -64,10 +64,7 @@ export const WalletDetailScreen = () => {
             title="Send Crypto"
             description={`Send your ${coinOrToken.metadata.symbol} to another address`}
           >
-            <WalletDetailSendFlow
-              balance={balance}
-              coinSymbol={coinOrToken.metadata.symbol}
-            />
+            <WalletDetailSendFlow coinSymbol={coinOrToken.metadata.symbol} />
           </CustomDrawer>
 
           <CustomDrawer

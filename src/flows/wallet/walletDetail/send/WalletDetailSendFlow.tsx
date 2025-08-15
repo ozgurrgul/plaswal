@@ -6,7 +6,6 @@ import { WalletDetailSendPreviewStep } from "./WalletDetailSendPreviewStep";
 import { WalletDetailSendSuccessStep } from "./WalletDetailSendSuccessStep";
 
 interface Props {
-  balance: string;
   coinSymbol: SupportedCoinOrTokenSymbol;
 }
 
@@ -17,10 +16,7 @@ interface SendFormData {
   amount: string;
 }
 
-export const WalletDetailSendFlow: React.FC<Props> = ({
-  balance,
-  coinSymbol,
-}) => {
+export const WalletDetailSendFlow: React.FC<Props> = ({ coinSymbol }) => {
   const [step, setStep] = useState<SendStep>("input");
   const [formData, setFormData] = useState<SendFormData>({
     recipientAddress: "",
@@ -49,7 +45,6 @@ export const WalletDetailSendFlow: React.FC<Props> = ({
   const steps: Record<SendStep, React.ReactNode> = {
     input: (
       <WalletDetailSendInputStep
-        balance={balance}
         coinSymbol={coinSymbol}
         onContinue={handleContinueToPreview}
       />

@@ -10,15 +10,14 @@ import {
   createSendFormSchema,
   SendFormData,
 } from "./WalletDetailSendFlowHelper";
+import { BalanceInput } from "@/src/ui/BalanceInput/BalanceInput";
 
 interface Props {
-  balance: string;
   coinSymbol: SupportedCoinOrTokenSymbol;
   onContinue: (data: SendFormData) => void;
 }
 
 export const WalletDetailSendInputStep: React.FC<Props> = ({
-  balance,
   coinSymbol,
   onContinue,
 }) => {
@@ -49,11 +48,10 @@ export const WalletDetailSendInputStep: React.FC<Props> = ({
       style={{ display: "flex", flexDirection: "column", gap: "16px" }}
     >
       <div>
-        <label>Recipient Address</label>
         <input
           {...register("recipientAddress")}
           type="text"
-          placeholder="Enter wallet address"
+          placeholder="Recipient address"
           style={{
             width: "100%",
             borderColor: errors.recipientAddress ? "var(--error)" : undefined,
@@ -72,17 +70,7 @@ export const WalletDetailSendInputStep: React.FC<Props> = ({
       </div>
 
       <div>
-        <label>Amount ({coinSymbol})</label>
-        <input
-          {...register("amount")}
-          type="number"
-          placeholder="0.00"
-          step="any"
-          style={{
-            width: "100%",
-            borderColor: errors.amount ? "var(--error)" : undefined,
-          }}
-        />
+        <BalanceInput coinSymbol={coinSymbol} {...register("amount")} />
         {errors.amount && (
           <div
             style={{
@@ -93,9 +81,6 @@ export const WalletDetailSendInputStep: React.FC<Props> = ({
             {errors.amount.message}
           </div>
         )}
-        <div style={{ color: "var(--text-secondary)", marginTop: "4px" }}>
-          Available: {balance} {coinSymbol}
-        </div>
       </div>
 
       <button
