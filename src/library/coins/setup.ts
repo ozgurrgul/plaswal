@@ -6,15 +6,22 @@ import { SolanaPlugin } from "./plugins/solana/SolanaPlugin";
 
 export function setupCoins(): void {
   // Register native coins
-  CoinRegistry.register(new EthereumPlugin());
-  CoinRegistry.register(new SolanaPlugin());
+  const ethereumPlugin = new EthereumPlugin();
+  const solanaPlugin = new SolanaPlugin();
+
+  CoinRegistry.register(ethereumPlugin);
+  CoinRegistry.register(solanaPlugin);
 
   // Register known tokens
-  const erc20Tokens = Erc20Plugin.createKnownTokens();
-  const splTokens = SplTokenPlugin.createKnownTokens();
+  ethereumPlugin
+    .getKnownTokenMetadata()
+    .map((tokenMetadata) => new Erc20Plugin(tokenMetadata, ethereumPlugin))
+    .forEach((token) => CoinRegistry.registerToken(token));
 
-  erc20Tokens.forEach((token) => CoinRegistry.registerToken(token));
-  splTokens.forEach((token) => CoinRegistry.registerToken(token));
+  solanaPlugin
+    .getKnownTokenMetadata()
+    .map((tokenMetadata) => new SplTokenPlugin(tokenMetadata, solanaPlugin))
+    .forEach((token) => CoinRegistry.registerToken(token));
 }
 
 export function areCoinsSetup(): boolean {

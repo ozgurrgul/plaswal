@@ -57,6 +57,7 @@ export class EthereumPlugin implements BaseCoinPlugin {
         iconUrl:
           "https://assets.coingecko.com/coins/images/325/standard/Tether.png",
         isNative: false,
+        explorerUrl: "https://etherscan.io",
       },
     ];
   }

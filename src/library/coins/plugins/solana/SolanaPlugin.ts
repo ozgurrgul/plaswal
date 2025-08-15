@@ -175,6 +175,7 @@ export class SolanaPlugin implements BaseCoinPlugin {
         iconUrl:
           "https://assets.coingecko.com/coins/images/34188/standard/jup.png?1704266489",
         isNative: false,
+        explorerUrl: "https://explorer.solana.com",
       },
     ];
   }

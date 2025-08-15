@@ -12,7 +12,7 @@ export interface CoinMetadata {
   name: string;
   decimals: number;
   iconUrl?: string;
-  explorerUrl?: string;
+  explorerUrl: string;
   isNative: boolean;
 }
 
