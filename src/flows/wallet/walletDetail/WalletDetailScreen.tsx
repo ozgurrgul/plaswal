@@ -1,9 +1,6 @@
-import { useParams } from "react-router";
-import { Header } from "@/src/ui/components/Header";
 import "./WalletDetailScreen.css";
 import { CopyIcon } from "@/src/ui/components/CopyIcon";
 import { SupportedCoinOrTokenSymbol } from "@/src/library/coins/types";
-import { QrCodeIcon } from "@/src/ui/components/Icons";
 import { useCoinOrToken } from "@/src/library/coins/hooks/useCoinOrToken";
 import { CustomDrawer } from "@/src/ui/components/Drawer";
 import { WalletDetailReceive } from "./WalletDetailReceive";
@@ -11,10 +8,11 @@ import { useCopyText } from "@/src/hooks/useCopyText";
 import { WalletDetailSendFlow } from "./send/WalletDetailSendFlow";
 import { useWalletDataByCoin } from "@/src/library/coins/hooks/useWalletDataByCoin";
 
-export const WalletDetailScreen = () => {
-  const { coinSymbol } = useParams() as {
-    coinSymbol: SupportedCoinOrTokenSymbol;
-  };
+interface Props {
+  coinSymbol: SupportedCoinOrTokenSymbol;
+}
+
+export const WalletDetailScreen: React.FC<Props> = ({ coinSymbol }) => {
   const walletData = useWalletDataByCoin(coinSymbol);
   const coinOrToken = useCoinOrToken(coinSymbol);
   const { copySuccess, handleCopyText } = useCopyText();
@@ -27,8 +25,6 @@ export const WalletDetailScreen = () => {
 
   return (
     <>
-      <Header title={`${coinOrToken.metadata.name} Wallet`} />
-
       <div className="wallet-detail-screen">
         <div className="wallet-detail-main-info">
           <div className="wallet-detail-coin-header">
@@ -38,7 +34,7 @@ export const WalletDetailScreen = () => {
             <div className="wallet-detail-coin-name">
               {coinOrToken.metadata.name}
             </div>
-            <QrCodeIcon />
+            {/* <QrCodeIcon /> */}
           </div>
 
           <div className="wallet-detail-balance-section">

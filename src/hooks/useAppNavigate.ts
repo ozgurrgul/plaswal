@@ -16,14 +16,9 @@ export const useAppNavigate = () => {
     navigate(ROUTES.WALLET);
   };
 
-  const goToWalletDetail = (coinSymbol: string) => {
-    navigate(`${ROUTES.WALLET_DETAIL.replace(":coinSymbol", coinSymbol)}`);
-  };
-
   return {
     canGoBack,
     goBack,
     goToWallet,
-    goToWalletDetail,
   };
 };
