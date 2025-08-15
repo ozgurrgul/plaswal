@@ -1,7 +1,6 @@
-# WXT + React
+# Plaswal
 
-Example dummy mnemonic:
-
+Devnet with balance mnemonic
 ```
-shaft forum frame tortoise annual solid employ surge judge rotate code fly
+fat yellow current bless swing indoor swear apology quantum victory now chef
 ```

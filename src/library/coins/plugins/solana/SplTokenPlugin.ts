@@ -25,7 +25,7 @@ export class SplTokenPlugin implements BaseTokenPlugin {
     return this.solanaPlugin.isValidAddress(walletCore, address);
   }
 
-  async getBalance(address: string): Promise<string> {
+  async getBalance(address: string): Promise<bigint> {
     try {
       const tokenAccount = await getSolanaRpc()
         .getTokenAccountsByOwner(
@@ -38,16 +38,17 @@ export class SplTokenPlugin implements BaseTokenPlugin {
         .send();
 
       if (tokenAccount.value.length === 0) {
-        return "0";
+        return BigInt(0);
       }
 
       return (
-        tokenAccount.value[0].account.data.parsed.info.tokenAmount
-          .uiAmountString || "0"
+        BigInt(
+          tokenAccount.value[0].account.data.parsed.info.tokenAmount.amount
+        ) || BigInt(0)
       );
     } catch (error) {
       console.error("Error fetching SPL token balance:", error);
-      return "0";
+      return BigInt(0);
     }
   }
 

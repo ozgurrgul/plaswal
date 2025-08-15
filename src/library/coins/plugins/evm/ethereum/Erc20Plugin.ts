@@ -26,7 +26,7 @@ export class Erc20Plugin implements BaseTokenPlugin {
     return this.ethereumPlugin.isValidAddress(walletCore, address);
   }
 
-  async getBalance(address: string): Promise<string> {
+  async getBalance(address: string): Promise<bigint> {
     try {
       const balance = (await getEthereumRpc().readContract({
         address: this.metadata.contractAddress as `0x${string}`,
@@ -43,7 +43,7 @@ export class Erc20Plugin implements BaseTokenPlugin {
         args: [address as `0x${string}`],
       })) as bigint;
 
-      return balance.toString();
+      return balance;
     } catch (error) {
       throw new Error(`Failed to fetch ERC-20 token balance: ${error}`);
     }

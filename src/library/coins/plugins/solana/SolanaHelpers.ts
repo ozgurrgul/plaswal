@@ -1,7 +1,10 @@
 import { createSolanaRpc } from "@solana/kit";
+import { RPC_URLS } from "./SolanaConstants";
 
-const RPC_URL = "https://go.getblock.us/86aac42ad4484f3c813079afc201451c";
+export const getSolanaRpcUrl = () => {
+  return RPC_URLS.development;
+};
 
 export const getSolanaRpc = () => {
-  return createSolanaRpc(RPC_URL);
+  return createSolanaRpc(getSolanaRpcUrl());
 };

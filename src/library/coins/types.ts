@@ -27,7 +27,7 @@ export interface BaseCoinPlugin {
 
   getAddress(walletCore: WalletCore, hdWallet: HDWallet): string;
   isValidAddress(walletCore: WalletCore, address: string): boolean;
-  getBalance(address: string): Promise<string>;
+  getBalance(address: string): Promise<bigint>;
   sendTransaction(
     walletCore: WalletCore,
     from: string,
@@ -43,7 +43,7 @@ export interface BaseTokenPlugin {
 
   getAddress: BaseCoinPlugin["getAddress"];
   isValidAddress: BaseCoinPlugin["isValidAddress"];
-  getBalance(address: string): Promise<string>;
+  getBalance: BaseCoinPlugin["getBalance"];
   sendTransaction: BaseCoinPlugin["sendTransaction"];
 }
 
@@ -73,3 +73,5 @@ export type WalletData = Record<
     balance: string;
   }
 >;
+
+export type CoinEnvironment = "production" | "development";

@@ -7,7 +7,7 @@ import { useWalletDataByCoin } from "./useWalletDataByCoin";
 
 type Input = {
   coinSymbol: SupportedCoinOrTokenSymbol;
-  onSuccess: () => void;
+  onSuccess: (txHash: string) => void;
 };
 
 export const useSendMutation = ({ onSuccess, coinSymbol }: Input) => {
@@ -36,6 +36,8 @@ export const useSendMutation = ({ onSuccess, coinSymbol }: Input) => {
         data.amount
       );
     },
-    onSuccess,
+    onSuccess: (txHash) => {
+      onSuccess(txHash);
+    },
   });
 };

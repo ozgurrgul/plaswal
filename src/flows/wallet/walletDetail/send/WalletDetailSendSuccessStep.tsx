@@ -2,18 +2,22 @@ import Lottie from "react-lottie";
 import lottieSendAnimation from "../../../../../assets/lottie/lottieSendAnimation.json";
 import { SendFormData } from "./WalletDetailSendFlowHelper";
 import { SupportedCoinOrTokenSymbol } from "@/src/library/coins/types";
+import { useCoinOrToken } from "@/src/library/coins/hooks/useCoinOrToken";
 
 interface Props {
   formData: SendFormData;
   coinSymbol: SupportedCoinOrTokenSymbol;
+  txHash: string;
   onSendAnotherTransaction: () => void;
 }
 
 export const WalletDetailSendSuccessStep: React.FC<Props> = ({
   formData,
   coinSymbol,
+  txHash,
   onSendAnotherTransaction,
 }) => {
+  const coinOrToken = useCoinOrToken(coinSymbol);
   const [showTransactionDetails, setShowTransactionDetails] = useState(false);
 
   if (!showTransactionDetails) {
@@ -82,6 +86,16 @@ export const WalletDetailSendSuccessStep: React.FC<Props> = ({
           >
             to {formData.recipientAddress}
           </div>
+        </div>
+
+        <div>
+          <a
+            href={`${coinOrToken?.metadata.explorerUrl}/tx/${txHash}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {txHash}
+          </a>
         </div>
 
         <button onClick={onSendAnotherTransaction}>

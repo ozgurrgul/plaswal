@@ -5,7 +5,7 @@ import { useSendMutation } from "@/src/library/coins/hooks/useSendMutation";
 interface Props {
   coinSymbol: SupportedCoinOrTokenSymbol;
   formData: SendFormData;
-  onSent: () => void;
+  onSent: (txHash: string) => void;
 }
 
 export const WalletDetailSendPreviewStep: React.FC<Props> = ({

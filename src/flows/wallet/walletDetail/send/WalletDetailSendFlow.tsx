@@ -4,7 +4,6 @@ import { WalletDetailSendInputStep } from "./WalletDetailSendInputStep";
 import { SupportedCoinOrTokenSymbol } from "@/src/library/coins/types";
 import { WalletDetailSendPreviewStep } from "./WalletDetailSendPreviewStep";
 import { WalletDetailSendSuccessStep } from "./WalletDetailSendSuccessStep";
-import { useSendMutation } from "@/src/library/coins/hooks/useSendMutation";
 
 interface Props {
   balance: string;
@@ -27,6 +26,7 @@ export const WalletDetailSendFlow: React.FC<Props> = ({
     recipientAddress: "",
     amount: "",
   });
+  const [txHash, setTxHash] = useState<string | null>(null);
 
   const resetForm = () => {
     setFormData({
@@ -41,6 +41,11 @@ export const WalletDetailSendFlow: React.FC<Props> = ({
     setStep("preview");
   };
 
+  const handleSent = (_txHash: string) => {
+    setTxHash(_txHash);
+    setStep("success");
+  };
+
   const steps: Record<SendStep, React.ReactNode> = {
     input: (
       <WalletDetailSendInputStep
@@ -53,7 +58,7 @@ export const WalletDetailSendFlow: React.FC<Props> = ({
       <WalletDetailSendPreviewStep
         coinSymbol={coinSymbol}
         formData={formData}
-        onSent={() => setStep("success")}
+        onSent={handleSent}
       />
     ),
 
@@ -62,6 +67,7 @@ export const WalletDetailSendFlow: React.FC<Props> = ({
         formData={formData}
         coinSymbol={coinSymbol}
         onSendAnotherTransaction={resetForm}
+        txHash={txHash ?? ""}
       />
     ),
   };

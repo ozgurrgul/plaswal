@@ -26,12 +26,12 @@ export class EthereumPlugin implements BaseCoinPlugin {
     return walletCore.AnyAddress.isValid(address, walletCore.CoinType.ethereum);
   }
 
-  async getBalance(address: string): Promise<string> {
+  async getBalance(address: string): Promise<bigint> {
     const balance = await getEthereumRpc().getBalance({
       address: address as `0x${string}`,
     });
 
-    return balance.toString();
+    return balance;
   }
 
   async sendTransaction(
