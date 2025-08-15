@@ -4,6 +4,21 @@
   padding: 12px;
 }
 
+.wallet-screen-fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .wallet-screen-coins-list {
   display: flex;
   flex-direction: column;

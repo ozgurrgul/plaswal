@@ -22,7 +22,7 @@ export const WalletScreen = () => {
   return (
     <>
       <Header title="Your Wallet" />
-      <div className="wallet-screen">
+      <div className="wallet-screen wallet-screen-fade-in">
         <div className="wallet-screen-coins-list">
           {Object.keys(walletData || {}).map((coinSymbol) => {
             const wallet = walletData?.[coinSymbol as keyof WalletData];
