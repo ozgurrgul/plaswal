@@ -1,6 +1,6 @@
-import { Drawer } from 'vaul';
-import { ReactNode } from 'react';
-import './Drawer.css';
+import { Drawer } from "vaul";
+import { ReactNode } from "react";
+import "./Drawer.css";
 
 interface DrawerProps {
   trigger: ReactNode;
@@ -9,30 +9,30 @@ interface DrawerProps {
   description?: string;
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
+  nested?: boolean;
 }
 
-export const CustomDrawer = ({ 
-  trigger, 
-  children, 
-  title, 
+export const CustomDrawer = ({
+  trigger,
+  children,
+  title,
   description,
   open,
-  onOpenChange 
+  onOpenChange,
+  nested = false,
 }: DrawerProps) => {
+  const RootComponent = nested ? Drawer.NestedRoot : Drawer.Root;
+
   return (
-    <Drawer.Root open={open} onOpenChange={onOpenChange}>
-      <Drawer.Trigger asChild>
-        {trigger}
-      </Drawer.Trigger>
+    <RootComponent open={open} onOpenChange={onOpenChange}>
+      <Drawer.Trigger asChild>{trigger}</Drawer.Trigger>
       <Drawer.Portal>
         <Drawer.Overlay className="drawer-overlay" />
         <Drawer.Content className="drawer-content">
           <div className="drawer-handle" />
           <div className="drawer-header">
             {title && (
-              <Drawer.Title className="drawer-title">
-                {title}
-              </Drawer.Title>
+              <Drawer.Title className="drawer-title">{title}</Drawer.Title>
             )}
             {description && (
               <Drawer.Description className="drawer-description">
@@ -40,11 +40,13 @@ export const CustomDrawer = ({
               </Drawer.Description>
             )}
           </div>
-          <div className="drawer-body">
-            {children}
-          </div>
+          <div className="drawer-body">{children}</div>
         </Drawer.Content>
       </Drawer.Portal>
-    </Drawer.Root>
+    </RootComponent>
   );
+};
+
+export const NestedDrawer = (props: Omit<DrawerProps, "nested">) => {
+  return <CustomDrawer {...props} nested={true} />;
 };
