@@ -24,7 +24,6 @@ export const WalletDetailScreen = () => {
   }
 
   const { balance, address } = walletData;
-  const balanceFiat = "133$"; // dummy for now
 
   return (
     <>
@@ -46,7 +45,6 @@ export const WalletDetailScreen = () => {
             <div className="wallet-detail-balance">
               {balance} {coinOrToken.metadata.symbol}
             </div>
-            <div className="wallet-detail-balance-fiat">{balanceFiat}</div>
           </div>
 
           <div className="wallet-detail-address-section">

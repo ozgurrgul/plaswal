@@ -52,12 +52,6 @@
   line-height: 1.2;
 }
 
-.wallet-detail-balance-fiat {
-  font-size: 0.875rem;
-  color: var(--text-secondary);
-  line-height: 1.2;
-}
-
 .wallet-detail-address-section {
   display: flex;
   flex-direction: column;
@@ -108,7 +102,6 @@
   width: 16px;
   height: 16px;
 }
-
 
 .wallet-detail-actions {
   display: grid;
