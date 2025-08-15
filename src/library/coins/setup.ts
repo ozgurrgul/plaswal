@@ -1,5 +1,4 @@
 import { CoinRegistry } from "./CoinRegistry";
-import { BitcoinPlugin } from "./plugins/BitcoinPlugin";
 import { EthereumPlugin } from "./plugins/evm/ethereum/EthereumPlugin";
 import { Erc20Plugin } from "./plugins/evm/ethereum/Erc20Plugin";
 import { SplTokenPlugin } from "./plugins/solana/SplTokenPlugin";
@@ -7,7 +6,6 @@ import { SolanaPlugin } from "./plugins/solana/SolanaPlugin";
 
 export function setupCoins(): void {
   // Register native coins
-  CoinRegistry.register(new BitcoinPlugin());
   CoinRegistry.register(new EthereumPlugin());
   CoinRegistry.register(new SolanaPlugin());
 
