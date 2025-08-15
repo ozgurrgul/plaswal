@@ -116,7 +116,11 @@ export class SolanaPlugin implements BaseCoinPlugin {
         );
       }
 
-      const rpcSubscriptions = createSolanaRpcSubscriptions(getSolanaRpcUrl());
+      // Replace http with ws since RPC is giving errors with SSL
+      const wsUrl = getSolanaRpcUrl()
+        .replace("https://", "wss://")
+        .replace("http://", "ws://");
+      const rpcSubscriptions = createSolanaRpcSubscriptions(wsUrl);
 
       const sendAndConfirmTransaction = sendAndConfirmTransactionFactory({
         rpc,

@@ -3,11 +3,8 @@ import { getWalletCore } from "@/src/library/walletCore/walletCore";
 import z from "zod";
 
 export const createSendFormSchema = (
-  balance: string,
   isValidAddressFn: BaseCoinPlugin["isValidAddress"]
 ) => {
-  const availableBalance = parseFloat(balance);
-
   return z.object({
     recipientAddress: z
       .string()
@@ -20,27 +17,7 @@ export const createSendFormSchema = (
           message: "Invalid address format",
         }
       ),
-    amount: z
-      .string()
-      .refine(
-        (val) => {
-          const numAmount = Number(val);
-          return numAmount <= availableBalance;
-        },
-        {
-          message: `Amount cannot exceed available balance of ${balance}`,
-        }
-      )
-      .refine(
-        (val) => {
-          const numAmount = Number(val);
-          // TODO temporarily allow 0 amount
-          return numAmount >= 0.0;
-        },
-        {
-          message: "Amount must be greater than 0",
-        }
-      ),
+    amount: z.string(),
   });
 };
 

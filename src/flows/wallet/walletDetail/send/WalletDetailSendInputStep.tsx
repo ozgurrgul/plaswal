@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useCoinOrToken } from "@/src/library/coins/hooks/useCoinOrToken";
@@ -25,9 +25,9 @@ export const WalletDetailSendInputStep: React.FC<Props> = ({
   const coinOrToken = useCoinOrToken(coinSymbol) as CoinOrTokenPlugin;
   const isValidAddressFn = coinOrToken.isValidAddress;
 
-  const sendFormSchema = React.useMemo(
-    () => createSendFormSchema(balance, isValidAddressFn),
-    [balance, isValidAddressFn]
+  const sendFormSchema = useMemo(
+    () => createSendFormSchema(isValidAddressFn),
+    [isValidAddressFn]
   );
 
   const {
