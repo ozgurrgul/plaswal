@@ -1,9 +1,14 @@
 import { createPublicClient, http } from "viem";
-import { mainnet } from "viem/chains";
+import { ETH_CHAINS } from "./EthereumConstants";
+import { COIN_ENVIRONMENT } from "@/src/library/constants";
+
+export const getEthereumChain = () => {
+  return ETH_CHAINS[COIN_ENVIRONMENT];
+};
 
 export const getEthereumRpc = () => {
   return createPublicClient({
-    chain: mainnet,
+    chain: getEthereumChain(),
     transport: http(),
   });
 };

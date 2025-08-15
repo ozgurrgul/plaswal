@@ -6,6 +6,7 @@ import type {
 } from "../../../types";
 import { HDWallet } from "@trustwallet/wallet-core/dist/src/wallet-core";
 import { getEthereumRpc } from "./EthereumHelpers";
+import { COIN_ENVIRONMENT } from "@/src/library/constants";
 
 export class EthereumPlugin implements BaseCoinPlugin {
   readonly metadata: CoinMetadata = {
@@ -49,18 +50,12 @@ export class EthereumPlugin implements BaseCoinPlugin {
         symbol: "USDT",
         name: "Tether USD",
         decimals: 6,
-        contractAddress: "0xdAC17F958D2ee523a2206206994597C13D831ec7",
+        contractAddress:
+          COIN_ENVIRONMENT === "development"
+            ? "0x7169d38820dfd117c3fa1f22a697dba58d90ba06"
+            : "0xdAC17F958D2ee523a2206206994597C13D831ec7",
         iconUrl:
           "https://assets.coingecko.com/coins/images/325/standard/Tether.png",
-        isNative: false,
-      },
-      {
-        symbol: "WETH",
-        name: "Wrapped Ether",
-        decimals: 18,
-        contractAddress: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
-        iconUrl:
-          "https://assets.coingecko.com/coins/images/2518/standard/weth.png",
         isNative: false,
       },
     ];
