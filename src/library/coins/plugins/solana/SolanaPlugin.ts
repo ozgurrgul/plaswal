@@ -19,6 +19,11 @@ import { getSolanaRpc, getSolanaRpcUrl } from "./SolanaHelpers";
 import { PERSISTENCE_KEYS } from "@/src/constants/PersistenceKeys";
 import { getValue } from "@/src/utils/persistence";
 import { getTransferSolInstruction } from "@solana-program/system";
+// TODO Later to be used for priority fee
+import {
+  getSetComputeUnitLimitInstruction,
+  getSetComputeUnitPriceInstruction,
+} from "@solana-program/compute-budget";
 
 export class SolanaPlugin implements BaseCoinPlugin {
   readonly metadata: CoinMetadata = {
