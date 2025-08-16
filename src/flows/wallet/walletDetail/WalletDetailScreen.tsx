@@ -7,6 +7,7 @@ import { WalletDetailReceive } from "./WalletDetailReceive";
 import { useCopyText } from "@/src/hooks/useCopyText";
 import { WalletDetailSendFlow } from "./send/WalletDetailSendFlow";
 import { useWalletDataByCoin } from "@/src/library/coins/hooks/useWalletDataByCoin";
+import { Button } from "@/src/ui/components/Button";
 
 interface Props {
   coinSymbol: SupportedCoinOrTokenSymbol;
@@ -56,7 +57,7 @@ export const WalletDetailScreen: React.FC<Props> = ({ coinSymbol }) => {
         </div>
         <div className="wallet-detail-actions">
           <CustomDrawer
-            trigger={<button>Send</button>}
+            trigger={<Button>Send</Button>}
             title="Send Crypto"
             description={`Send your ${coinOrToken.metadata.symbol} to another address`}
           >
@@ -64,14 +65,14 @@ export const WalletDetailScreen: React.FC<Props> = ({ coinSymbol }) => {
           </CustomDrawer>
 
           <CustomDrawer
-            trigger={<button>Receive</button>}
+            trigger={<Button>Receive</Button>}
             title="Receive Crypto"
             description={`Share your ${coinOrToken.metadata.symbol} address`}
           >
             <WalletDetailReceive address={address} />
           </CustomDrawer>
 
-          <button>Swap</button>
+          <Button>Swap</Button>
         </div>
       </div>
     </>

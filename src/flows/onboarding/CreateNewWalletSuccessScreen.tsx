@@ -1,3 +1,5 @@
+import { Button } from "@/src/ui/components/Button";
+
 interface Props {
   onContinueClick: () => void;
 }
@@ -8,7 +10,7 @@ export const CreateNewWalletSuccessScreen: React.FC<Props> = ({
   return (
     <div>
       You have successfully created a new wallet!
-      <button onClick={onContinueClick}>Continue</button>
+      <Button onClick={onContinueClick}>Continue</Button>
     </div>
   );
 };

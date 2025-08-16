@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useCreateWalletMutation } from "../../library/walletCore/hooks/useCreateWalletMutation";
 import { PERSISTENCE_KEYS } from "@/src/constants/PersistenceKeys";
 import { setValue } from "@/src/utils/persistence";
+import { Button } from "@/src/ui/components/Button";
 
 interface Props {
   onContinueClick: () => void;
@@ -36,12 +37,12 @@ export const CreateNewWalletScreen: React.FC<Props> = ({ onContinueClick }) => {
               <code className="mnemonic">{tempMnemonic}</code>
             </p>
           </div>
-          <button
+          <Button
             onClick={handleContinueClick}
             disabled={createWalletMutation.isPending}
           >
             Continue
-          </button>
+          </Button>
         </div>
       )}
     </div>

@@ -1,6 +1,7 @@
 import { SupportedCoinOrTokenSymbol } from "@/src/library/coins/types";
 import { SendFormData } from "./WalletDetailSendFlowHelper";
 import { useSendMutation } from "@/src/library/coins/hooks/useSendMutation";
+import { Button } from "@/src/ui/components/Button";
 
 interface Props {
   coinSymbol: SupportedCoinOrTokenSymbol;
@@ -88,9 +89,9 @@ export const WalletDetailSendPreviewStep: React.FC<Props> = ({
         </div>
       </div>
 
-      <button onClick={() => sendMutation(formData)} disabled={isPending}>
+      <Button onClick={() => sendMutation(formData)} disabled={isPending}>
         {isPending ? "Sending..." : "Confirm and Send!"}
-      </button>
+      </Button>
 
       {error && (
         <div style={{ color: "var(--error)", marginTop: "16px" }}>

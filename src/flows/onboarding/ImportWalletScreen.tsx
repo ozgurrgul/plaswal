@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useIsValidWalletMutation } from "../../library/walletCore/hooks/useIsValidWalletMutation";
+import { Button } from "@/src/ui/components/Button";
 
 interface Props {
   onContinueClick: () => void;
@@ -33,12 +34,12 @@ export const ImportWalletScreen: React.FC<Props> = ({ onContinueClick }) => {
           {isValidWalletMutation.error.message}
         </p>
       )}
-      <button
+      <Button
         onClick={handleImportClick}
         disabled={isValidWalletMutation.isPending}
       >
         Import and continue
-      </button>
+      </Button>
     </div>
   );
 };

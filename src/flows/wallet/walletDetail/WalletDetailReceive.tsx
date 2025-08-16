@@ -1,4 +1,5 @@
 import { useCopyText } from "@/src/hooks/useCopyText";
+import { Button } from "@/src/ui/components/Button";
 import { QRCodeSVG } from "qrcode.react";
 
 interface Props {
@@ -30,13 +31,13 @@ export const WalletDetailReceive: React.FC<Props> = ({ address }) => {
           {address}
         </p>
       </div>
-      <button
+      <Button
         className="drawer-button-primary"
         onClick={() => handleCopyText(address)}
         style={{ width: "100%" }}
       >
         {copySuccess ? "Copied!" : "Copy Address"}
-      </button>
+      </Button>
     </div>
   );
 };

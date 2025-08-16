@@ -11,6 +11,7 @@ import {
   SendFormData,
 } from "./WalletDetailSendFlowHelper";
 import { BalanceInput } from "@/src/ui/BalanceInput/BalanceInput";
+import { Button } from "@/src/ui/components/Button";
 
 interface Props {
   coinSymbol: SupportedCoinOrTokenSymbol;
@@ -83,7 +84,7 @@ export const WalletDetailSendInputStep: React.FC<Props> = ({
         )}
       </div>
 
-      <button
+      <Button
         type="submit"
         disabled={!isValid}
         style={{
@@ -91,7 +92,7 @@ export const WalletDetailSendInputStep: React.FC<Props> = ({
         }}
       >
         Review Transaction
-      </button>
+      </Button>
     </form>
   );
 };

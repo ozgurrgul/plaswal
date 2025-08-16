@@ -3,6 +3,7 @@ import lottieSendAnimation from "../../../../../assets/lottie/lottieSendAnimatio
 import { SendFormData } from "./WalletDetailSendFlowHelper";
 import { SupportedCoinOrTokenSymbol } from "@/src/library/coins/types";
 import { useCoinOrToken } from "@/src/library/coins/hooks/useCoinOrToken";
+import { Button } from "@/src/ui/components/Button";
 
 interface Props {
   formData: SendFormData;
@@ -98,9 +99,9 @@ export const WalletDetailSendSuccessStep: React.FC<Props> = ({
           </a>
         </div>
 
-        <button onClick={onSendAnotherTransaction}>
+        <Button onClick={onSendAnotherTransaction}>
           Send Another Transaction
-        </button>
+        </Button>
       </div>
     </div>
   );

@@ -1,4 +1,5 @@
 import { useRef, useEffect, useState } from "react";
+import { Button } from "./Button";
 
 interface Props<T extends string> {
   step: T;
@@ -40,9 +41,9 @@ export const Stepper = <T extends string>({
   return (
     <div>
       {!hideBackButton && (
-        <button onClick={handleBack} disabled={!canGoBack}>
+        <Button onClick={handleBack} disabled={!canGoBack}>
           back
-        </button>
+        </Button>
       )}
       <div>{steps[step]}</div>
     </div>
