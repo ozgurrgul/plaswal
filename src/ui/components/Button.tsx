@@ -1,7 +1,8 @@
-interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  children: React.ReactNode;
-}
+import * as React from "react";
+import JoyButton from "@mui/joy/Button";
+
+type Props = React.ComponentProps<typeof JoyButton>;
 
 export const Button: React.FC<Props> = ({ children, ...props }) => {
-  return <button {...props}>{children}</button>;
+  return <JoyButton {...props}>{children}</JoyButton>;
 };

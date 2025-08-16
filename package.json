@@ -15,7 +15,11 @@
     "postinstall": "wxt prepare"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@fontsource/inter": "^5.2.6",
     "@hookform/resolvers": "^5.2.1",
+    "@mui/joy": "^5.0.0-beta.52",
     "@solana-program/compute-budget": "^0.8.0",
     "@solana-program/system": "^0.7.0",
     "@solana/kit": "^2.3.0",

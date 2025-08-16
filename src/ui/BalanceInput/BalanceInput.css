@@ -2,21 +2,6 @@
   position: relative;
 }
 
-.balance-input-container input {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.balance-input-coin-symbol {
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #666;
-}
-
 .balance-input-balance {
   font-size: 0.875rem;
   color: var(--text-light);

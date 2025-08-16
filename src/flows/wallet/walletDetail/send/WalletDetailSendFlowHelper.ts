@@ -17,7 +17,14 @@ export const createSendFormSchema = (
           message: "Invalid address format",
         }
       ),
-    amount: z.string(),
+    amount: z.string().refine(
+      (amount) => {
+        return parseFloat(amount) > 0;
+      },
+      {
+        message: "Amount must be greater than 0",
+      }
+    ),
   });
 };
 

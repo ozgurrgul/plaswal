@@ -23,7 +23,6 @@ export const WalletItem: React.FC<Props> = ({ coin, wallet }) => {
               <div className="wallet-item-name">
                 {coin.name} ({coin.symbol})
               </div>
-              <div className="wallet-item-address">{wallet.address}</div>
             </div>
 
             <div className="wallet-item-balance">

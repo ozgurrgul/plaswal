@@ -7,11 +7,7 @@ interface Props {
 
 export const CopyIcon = ({ onClick, isCopied }: Props) => {
   return (
-    <span
-      className="wallet-detail-copy-button"
-      onClick={onClick}
-      title={isCopied ? "Copied!" : "Copy address"}
-    >
+    <span onClick={onClick} title={isCopied ? "Copied!" : "Copy address"}>
       {isCopied ? <CheckIcon /> : <CopyIconSvg />}
     </span>
   );

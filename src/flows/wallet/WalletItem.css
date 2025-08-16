@@ -2,9 +2,8 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  width: 100%;
   border-bottom: 1px solid var(--border);
-  padding: 4px 8px;
+  padding: 16px 12px;
   color: var(--text);
 }
 
@@ -14,13 +13,13 @@
 
 .wallet-item:hover {
   cursor: pointer;
-  background-color: var(--accent);
-  color: var(--accent-text);
+  background-color: var(--joy-palette-neutral-softBg);
+  transition: all 0.2s ease-in-out;
 }
 
 .wallet-item img {
-  width: 24px;
-  height: 24px;
+  width: 36px;
+  height: 36px;
 }
 
 .wallet-item-content {
@@ -34,17 +33,10 @@
 .wallet-item-name {
   display: flex;
   align-items: center;
-  font-size: 1rem;
-}
-
-.wallet-item-address {
-  font-size: 0.75rem;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-  max-width: 100px;
+  font-size: var(--fontSize-md);
 }
 
 .wallet-item-balance {
-  font-size: 12px;
+  font-size: var(--fontSize-sm);
+  color: var(--text-secondary);
 }

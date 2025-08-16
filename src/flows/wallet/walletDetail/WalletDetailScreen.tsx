@@ -8,6 +8,7 @@ import { useCopyText } from "@/src/hooks/useCopyText";
 import { WalletDetailSendFlow } from "./send/WalletDetailSendFlow";
 import { useWalletDataByCoin } from "@/src/library/coins/hooks/useWalletDataByCoin";
 import { Button } from "@/src/ui/components/Button";
+import { SendIcon, ReceiveIcon, SwapIcon } from "@/src/ui/components/Icons";
 
 interface Props {
   coinSymbol: SupportedCoinOrTokenSymbol;
@@ -35,7 +36,6 @@ export const WalletDetailScreen: React.FC<Props> = ({ coinSymbol }) => {
             <div className="wallet-detail-coin-name">
               {coinOrToken.metadata.name}
             </div>
-            {/* <QrCodeIcon /> */}
           </div>
 
           <div className="wallet-detail-balance-section">
@@ -48,16 +48,22 @@ export const WalletDetailScreen: React.FC<Props> = ({ coinSymbol }) => {
             <div className="wallet-detail-address-label">Address</div>
             <div className="wallet-detail-address-container">
               <div className="wallet-detail-address">{address}</div>
-              <CopyIcon
-                onClick={() => handleCopyText(address)}
-                isCopied={copySuccess}
-              />
+              <span className="wallet-detail-copy-button">
+                <CopyIcon
+                  onClick={() => handleCopyText(address)}
+                  isCopied={copySuccess}
+                />
+              </span>
             </div>
           </div>
         </div>
         <div className="wallet-detail-actions">
           <CustomDrawer
-            trigger={<Button>Send</Button>}
+            trigger={
+              <Button startDecorator={<SendIcon />}>
+                Send
+              </Button>
+            }
             title="Send Crypto"
             description={`Send your ${coinOrToken.metadata.symbol} to another address`}
           >
@@ -65,14 +71,20 @@ export const WalletDetailScreen: React.FC<Props> = ({ coinSymbol }) => {
           </CustomDrawer>
 
           <CustomDrawer
-            trigger={<Button>Receive</Button>}
+            trigger={
+              <Button startDecorator={<ReceiveIcon />}>
+                Receive
+              </Button>
+            }
             title="Receive Crypto"
             description={`Share your ${coinOrToken.metadata.symbol} address`}
           >
             <WalletDetailReceive address={address} />
           </CustomDrawer>
 
-          <Button>Swap</Button>
+          <Button startDecorator={<SwapIcon />}>
+            Swap
+          </Button>
         </div>
       </div>
     </>

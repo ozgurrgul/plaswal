@@ -1,13 +1,24 @@
 :root {
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
+  --bg: var(--joy-palette-background-body);
+  --accent-bg: #2b2b2b;
+  --text: var(--joy-palette-text-primary);
+  --text-secondary: var(--joy-palette-text-secondary);
+  --text-light: #ababab;
+  --accent: #ffb300;
+  --accent-text: var(--bg);
+  --border: var(--joy-palette-neutral-outlinedBorder);
+  --fontSize-sm: var(--joy-fontSize-sm);
+  --fontSize-md: var(--joy-fontSize-md);
+  --fontSize-lg: var(--joy-fontSize-lg);
+  --fontSize-xl: var(--joy-fontSize-xl);
 }
 
 #root {
   width: 500px;
   min-height: 600px;
   margin: 0 auto;
+}
+
+body {
+  background-color: var(--bg);
 }

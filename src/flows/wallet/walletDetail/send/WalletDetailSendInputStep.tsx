@@ -12,6 +12,9 @@ import {
 } from "./WalletDetailSendFlowHelper";
 import { BalanceInput } from "@/src/ui/BalanceInput/BalanceInput";
 import { Button } from "@/src/ui/components/Button";
+import Input from "@mui/joy/Input";
+import FormControl from "@mui/joy/FormControl";
+import FormHelperText from "@mui/joy/FormHelperText";
 
 interface Props {
   coinSymbol: SupportedCoinOrTokenSymbol;
@@ -43,45 +46,38 @@ export const WalletDetailSendInputStep: React.FC<Props> = ({
     onContinue(data);
   };
 
+  const recipientAddressError = errors.recipientAddress;
+  const amountError = errors.amount;
+
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
       style={{ display: "flex", flexDirection: "column", gap: "16px" }}
     >
       <div>
-        <input
-          {...register("recipientAddress")}
-          type="text"
-          placeholder="Recipient address"
-          style={{
-            width: "100%",
-            borderColor: errors.recipientAddress ? "var(--error)" : undefined,
-          }}
-        />
-        {errors.recipientAddress && (
-          <div
+        <FormControl error={!!recipientAddressError}>
+          <Input
+            {...register("recipientAddress")}
+            type="text"
+            placeholder="Recipient address"
+            error={!!recipientAddressError}
             style={{
-              color: "var(--error)",
-              marginTop: "4px",
+              borderColor: recipientAddressError ? "var(--error)" : undefined,
             }}
-          >
-            {errors.recipientAddress.message}
-          </div>
-        )}
+          />
+          {recipientAddressError && (
+            <FormHelperText>{recipientAddressError.message}</FormHelperText>
+          )}
+        </FormControl>
       </div>
 
       <div>
-        <BalanceInput coinSymbol={coinSymbol} {...register("amount")} />
-        {errors.amount && (
-          <div
-            style={{
-              color: "var(--error)",
-              marginTop: "4px",
-            }}
-          >
-            {errors.amount.message}
-          </div>
-        )}
+        <FormControl error={!!amountError}>
+          <BalanceInput coinSymbol={coinSymbol} {...register("amount")} />
+          {amountError && (
+            <FormHelperText>{amountError.message}</FormHelperText>
+          )}
+        </FormControl>
       </div>
 
       <Button

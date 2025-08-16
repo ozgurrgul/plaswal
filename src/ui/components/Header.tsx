@@ -17,6 +17,8 @@ export const Header: React.FC<Props> = ({ title }) => {
         alignItems: "center",
         padding: "0px 12px",
         minHeight: "40px",
+        fontSize: "var(--fontSize-lg)",
+        color: "var(--text)",
       }}
     >
       {canGoBack && (

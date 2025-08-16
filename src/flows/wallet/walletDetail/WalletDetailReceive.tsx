@@ -13,19 +13,19 @@ export const WalletDetailReceive: React.FC<Props> = ({ address }) => {
     <div style={{ textAlign: "center" }}>
       <div
         style={{
-          padding: "20px",
+          padding: "12px",
           backgroundColor: "var(--accent-bg)",
-          borderRadius: "var(--standard-border-radius)",
-          marginBottom: "16px",
-          border: "var(--border-width) solid var(--border)",
+          borderRadius: "5px",
+          border: "1px solid var(--border)",
         }}
       >
         <QRCodeSVG value={address} />
         <p
           style={{
-            margin: "0",
-            fontSize: "0.9rem",
+            fontSize: "var(--fontSize-md)",
             wordBreak: "break-all",
+            marginTop: "12px",
+            color: "var(--text-secondary)",
           }}
         >
           {address}
@@ -34,7 +34,7 @@ export const WalletDetailReceive: React.FC<Props> = ({ address }) => {
       <Button
         className="drawer-button-primary"
         onClick={() => handleCopyText(address)}
-        style={{ width: "100%" }}
+        style={{ width: "100%", marginTop: "12px" }}
       >
         {copySuccess ? "Copied!" : "Copy Address"}
       </Button>
