@@ -9,6 +9,12 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
 export const BalanceInput: React.FC<Props> = ({ coinSymbol, ...props }) => {
   const walletData = useWalletDataByCoin(coinSymbol);
 
+  const handleInput = (e: React.FormEvent<HTMLInputElement>) => {
+    const input = e.currentTarget;
+    // Only allow numbers and one decimal point
+    input.value = input.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');
+  };
+
   if (!walletData) {
     return null;
   }
@@ -17,11 +23,11 @@ export const BalanceInput: React.FC<Props> = ({ coinSymbol, ...props }) => {
     <div>
       <div className="balance-input-container">
         <input
-          type="number"
           placeholder={`0.00 ${coinSymbol}`}
           style={{
             width: "100%",
           }}
+          onInput={handleInput}
           {...props}
         />
         <div className="balance-input-coin-symbol">{coinSymbol}</div>
