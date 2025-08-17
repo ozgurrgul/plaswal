@@ -22,10 +22,7 @@ Soon:
 
 Video:
 
-<video width="600" controls>
-  <source src="docs/rec.mov" type="video/quicktime">
-  <source src="docs/rec.mov" type="video/mp4">
-</video>
+https://github.com/ozgurrgul/plaswal/raw/refs/heads/main/docs/rec.mov
 
 In order to run locally, just clone the repo and run following commands:
 
@@ -35,6 +32,7 @@ npm run dev
 ```
 
 Devnet mnemonic with balance for test:
+
 ```
 fat yellow current bless swing indoor swear apology quantum victory now chef
 ```
