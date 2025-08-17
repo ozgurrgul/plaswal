@@ -48,8 +48,6 @@ export const BackIcon = () => {
   );
 };
 
-
-
 export const CopyIcon = () => {
   return (
     <svg
@@ -148,6 +146,52 @@ export const SwapIcon = () => {
       <path d="M7 8H21" />
       <path d="M13 20L17 16L13 12" />
       <path d="M17 16H3" />
+    </svg>
+  );
+};
+
+export const SortByBalanceIcon = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      className="lucide lucide-arrow-down-wide-narrow-icon lucide-arrow-down-wide-narrow"
+    >
+      <path d="m3 16 4 4 4-4" />
+      <path d="M7 20V4" />
+      <path d="M11 4h10" />
+      <path d="M11 8h7" />
+      <path d="M11 12h4" />
+    </svg>
+  );
+};
+
+export const SortAlphabeticallyIcon = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      className="lucide lucide-arrow-down-az-icon lucide-arrow-down-a-z"
+    >
+      <path d="m3 16 4 4 4-4" />
+      <path d="M7 20V4" />
+      <path d="M20 8h-5" />
+      <path d="M15 10V6.5a2.5 2.5 0 0 1 5 0V10" />
+      <path d="M15 14h5l-5 6h5" />
     </svg>
   );
 };

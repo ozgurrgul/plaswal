@@ -9,7 +9,7 @@ import { useMemo } from "react";
 type WalletItem = {
   symbol: string;
   address: string;
-  balance: string;
+  balance: bigint;
   isNative: boolean;
 };
 
@@ -102,8 +102,8 @@ export const useWalletData = () => {
 
     // sort by balance desc
     const sortedItems = walletItems.sort((a, b) => {
-      const balanceA = parseFloat(a.balance) || 0;
-      const balanceB = parseFloat(b.balance) || 0;
+      const balanceA = Number(a.balance) || 0;
+      const balanceB = Number(b.balance) || 0;
       return balanceB - balanceA;
     });
 
@@ -111,7 +111,7 @@ export const useWalletData = () => {
     sortedItems.forEach((item) => {
       walletData[item.symbol] = {
         address: item.address,
-        balance: item.balance,
+        balance: item.balance.toString(),
         isNative: item.isNative,
       };
     });
