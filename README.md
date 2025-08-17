@@ -22,7 +22,7 @@ Soon:
 
 Video:
 
-https://github.com/ozgurrgul/plaswal/raw/refs/heads/main/docs/rec.mov
+https://raw.githubusercontent.com/ozgurrgul/plaswal/refs/heads/main/docs/rec.mov
 
 In order to run locally, just clone the repo and run following commands:
 
