@@ -17,11 +17,6 @@
   transition: all 0.2s ease-in-out;
 }
 
-.wallet-item img {
-  width: 36px;
-  height: 36px;
-}
-
 .wallet-item-content {
   display: flex;
   gap: 4px;

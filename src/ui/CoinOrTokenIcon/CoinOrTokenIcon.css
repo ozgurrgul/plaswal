@@ -1,0 +1,17 @@
+.coin-or-token-icon {
+  border-radius: 50%;
+}
+
+.token-icon {
+  position: relative;
+}
+
+.token-icon-parent {
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background-color: var(--bg);
+  padding: 2px;
+}

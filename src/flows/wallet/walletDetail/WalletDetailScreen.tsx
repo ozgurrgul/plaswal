@@ -9,6 +9,7 @@ import { WalletDetailSendFlow } from "./send/WalletDetailSendFlow";
 import { useWalletDataByCoin } from "@/src/library/coins/hooks/useWalletDataByCoin";
 import { Button } from "@/src/ui/components/Button";
 import { SendIcon, ReceiveIcon, SwapIcon } from "@/src/ui/components/Icons";
+import { CoinOrTokenIcon } from "@/src/ui/CoinOrTokenIcon/CoinOrTokenIcon";
 
 interface Props {
   coinSymbol: SupportedCoinOrTokenSymbol;
@@ -30,9 +31,10 @@ export const WalletDetailScreen: React.FC<Props> = ({ coinSymbol }) => {
       <div className="wallet-detail-screen">
         <div className="wallet-detail-main-info">
           <div className="wallet-detail-coin-header">
-            {coinOrToken.metadata.iconUrl && (
-              <img src={coinOrToken.metadata.iconUrl} />
-            )}
+            <CoinOrTokenIcon
+              coinSymbol={coinOrToken.metadata.symbol}
+              size={24}
+            />
             <div className="wallet-detail-coin-name">
               {coinOrToken.metadata.name}
             </div>
@@ -59,11 +61,7 @@ export const WalletDetailScreen: React.FC<Props> = ({ coinSymbol }) => {
         </div>
         <div className="wallet-detail-actions">
           <CustomDrawer
-            trigger={
-              <Button startDecorator={<SendIcon />}>
-                Send
-              </Button>
-            }
+            trigger={<Button startDecorator={<SendIcon />}>Send</Button>}
             title="Send Crypto"
             description={`Send your ${coinOrToken.metadata.symbol} to another address`}
           >
@@ -71,20 +69,14 @@ export const WalletDetailScreen: React.FC<Props> = ({ coinSymbol }) => {
           </CustomDrawer>
 
           <CustomDrawer
-            trigger={
-              <Button startDecorator={<ReceiveIcon />}>
-                Receive
-              </Button>
-            }
+            trigger={<Button startDecorator={<ReceiveIcon />}>Receive</Button>}
             title="Receive Crypto"
             description={`Share your ${coinOrToken.metadata.symbol} address`}
           >
             <WalletDetailReceive address={address} />
           </CustomDrawer>
 
-          <Button startDecorator={<SwapIcon />}>
-            Swap
-          </Button>
+          <Button startDecorator={<SwapIcon />}>Swap</Button>
         </div>
       </div>
     </>
