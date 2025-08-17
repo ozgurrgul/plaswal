@@ -20,6 +20,13 @@ Soon:
 - Token management
 - Swapping
 
+Video:
+
+<video width="600" controls>
+  <source src="docs/rec.mov" type="video/quicktime">
+  <source src="docs/rec.mov" type="video/mp4">
+</video>
+
 In order to run locally, just clone the repo and run following commands:
 
 ```
