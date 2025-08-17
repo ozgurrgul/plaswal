@@ -18,7 +18,7 @@ export const WalletDetailSendSuccessStep: React.FC<Props> = ({
   txHash,
   onSendAnotherTransaction,
 }) => {
-  const coinOrToken = useAsset(assetSymbol);
+  const asset = useAsset(assetSymbol);
   const [showTransactionDetails, setShowTransactionDetails] = useState(false);
 
   if (!showTransactionDetails) {
@@ -91,7 +91,7 @@ export const WalletDetailSendSuccessStep: React.FC<Props> = ({
 
         <div>
           <a
-            href={`${coinOrToken?.metadata.explorerUrl}/tx/${txHash}`}
+            href={`${asset?.metadata.explorerUrl}/tx/${txHash}`}
             target="_blank"
             rel="noopener noreferrer"
           >

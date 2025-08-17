@@ -17,10 +17,10 @@ interface Props {
 
 export const WalletDetailScreen: React.FC<Props> = ({ assetSymbol }) => {
   const walletData = useWalletDataByCoin(assetSymbol);
-  const coinOrToken = useAsset(assetSymbol);
+  const asset = useAsset(assetSymbol);
   const { copySuccess, handleCopyText } = useCopyText();
 
-  if (!walletData || !coinOrToken) {
+  if (!walletData || !asset) {
     return null;
   }
 
@@ -31,15 +31,15 @@ export const WalletDetailScreen: React.FC<Props> = ({ assetSymbol }) => {
       <div className="wallet-detail-screen">
         <div className="wallet-detail-main-info">
           <div className="wallet-detail-coin-header">
-            <AssetIcon assetSymbol={coinOrToken.metadata.symbol} size={24} />
+            <AssetIcon assetSymbol={asset.metadata.symbol} size={24} />
             <div className="wallet-detail-coin-name">
-              {coinOrToken.metadata.name}
+              {asset.metadata.name}
             </div>
           </div>
 
           <div className="wallet-detail-balance-section">
             <div className="wallet-detail-balance">
-              {balance} {coinOrToken.metadata.symbol}
+              {balance} {asset.metadata.symbol}
             </div>
           </div>
 
@@ -60,15 +60,15 @@ export const WalletDetailScreen: React.FC<Props> = ({ assetSymbol }) => {
           <CustomDrawer
             trigger={<Button startDecorator={<SendIcon />}>Send</Button>}
             title="Send Crypto"
-            description={`Send your ${coinOrToken.metadata.symbol} to another address`}
+            description={`Send your ${asset.metadata.symbol} to another address`}
           >
-            <WalletDetailSendFlow assetSymbol={coinOrToken.metadata.symbol} />
+            <WalletDetailSendFlow assetSymbol={asset.metadata.symbol} />
           </CustomDrawer>
 
           <CustomDrawer
             trigger={<Button startDecorator={<ReceiveIcon />}>Receive</Button>}
             title="Receive Crypto"
-            description={`Share your ${coinOrToken.metadata.symbol} address`}
+            description={`Share your ${asset.metadata.symbol} address`}
           >
             <WalletDetailReceive address={address} />
           </CustomDrawer>

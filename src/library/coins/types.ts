@@ -47,7 +47,7 @@ export interface BaseTokenPlugin {
   sendTransaction: BaseCoinPlugin["sendTransaction"];
 }
 
-export type CoinOrTokenPlugin = BaseCoinPlugin | BaseTokenPlugin;
+export type AssetPlugin = BaseCoinPlugin | BaseTokenPlugin;
 
 export interface CoinRegistry {
   register(plugin: BaseCoinPlugin): void;

@@ -9,26 +9,26 @@ interface Props {
 }
 
 export const AssetIcon: React.FC<Props> = ({ assetSymbol, size }) => {
-  const coinOrToken = useAsset(assetSymbol);
+  const asset = useAsset(assetSymbol);
 
-  if (!coinOrToken) {
+  if (!asset) {
     return null;
   }
 
-  if (!coinOrToken.metadata.isNative) {
+  if (!asset.metadata.isNative) {
     return (
       <span className="token-icon">
         <img
           className="coin-or-token-icon"
-          src={coinOrToken.metadata.iconUrl}
-          alt={coinOrToken.metadata.name}
+          src={asset.metadata.iconUrl}
+          alt={asset.metadata.name}
           width={size}
           height={size}
         />
         <img
           className="token-icon-parent"
-          src={coinOrToken.metadata.iconUrl}
-          alt={coinOrToken.metadata.name}
+          src={asset.metadata.iconUrl}
+          alt={asset.metadata.name}
           width={size / 3}
           height={size / 3}
         />
@@ -39,8 +39,8 @@ export const AssetIcon: React.FC<Props> = ({ assetSymbol, size }) => {
   return (
     <img
       className="coin-or-token-icon"
-      src={coinOrToken.metadata.iconUrl}
-      alt={coinOrToken.metadata.name}
+      src={asset.metadata.iconUrl}
+      alt={asset.metadata.name}
       width={size}
       height={size}
     />

@@ -2,10 +2,7 @@ import React, { useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAsset } from "@/src/library/coins/hooks/useAsset";
-import {
-  CoinOrTokenPlugin,
-  AssetSymbol,
-} from "@/src/library/coins/types";
+import { AssetPlugin, AssetSymbol } from "@/src/library/coins/types";
 import {
   createSendFormSchema,
   SendFormData,
@@ -25,8 +22,8 @@ export const WalletDetailSendInputStep: React.FC<Props> = ({
   assetSymbol,
   onContinue,
 }) => {
-  const coinOrToken = useAsset(assetSymbol) as CoinOrTokenPlugin;
-  const isValidAddressFn = coinOrToken.isValidAddress;
+  const asset = useAsset(assetSymbol) as AssetPlugin;
+  const isValidAddressFn = asset.isValidAddress;
 
   const sendFormSchema = useMemo(
     () => createSendFormSchema(isValidAddressFn),

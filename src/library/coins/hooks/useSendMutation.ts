@@ -11,7 +11,7 @@ type Input = {
 };
 
 export const useSendMutation = ({ onSuccess, assetSymbol }: Input) => {
-  const coinOrToken = useAsset(assetSymbol);
+  const asset = useAsset(assetSymbol);
   const walletCore = useWalletCore();
   const walletData = useWalletDataByCoin(assetSymbol);
 
@@ -21,7 +21,7 @@ export const useSendMutation = ({ onSuccess, assetSymbol }: Input) => {
         throw new Error("WalletCore not initialized");
       }
 
-      if (!coinOrToken) {
+      if (!asset) {
         throw new Error("Coin or token not found");
       }
 
@@ -29,7 +29,7 @@ export const useSendMutation = ({ onSuccess, assetSymbol }: Input) => {
         throw new Error("Wallet data not found");
       }
 
-      return coinOrToken.sendTransaction(
+      return asset.sendTransaction(
         walletCore,
         walletData.address,
         data.recipientAddress,
