@@ -1,19 +1,19 @@
 import { SendFormData } from "@/src/flows/wallet/walletDetail/send/WalletDetailSendFlowHelper";
 import { useMutation } from "@tanstack/react-query";
-import { useCoinOrToken } from "./useCoinOrToken";
-import { SupportedCoinOrTokenSymbol } from "../types";
+import { useAsset } from "./useAsset";
+import { AssetSymbol } from "../types";
 import { useWalletCore } from "../../walletCore/WalletCoreProvider";
 import { useWalletDataByCoin } from "./useWalletDataByCoin";
 
 type Input = {
-  coinSymbol: SupportedCoinOrTokenSymbol;
+  assetSymbol: AssetSymbol;
   onSuccess: (txHash: string) => void;
 };
 
-export const useSendMutation = ({ onSuccess, coinSymbol }: Input) => {
-  const coinOrToken = useCoinOrToken(coinSymbol);
+export const useSendMutation = ({ onSuccess, assetSymbol }: Input) => {
+  const coinOrToken = useAsset(assetSymbol);
   const walletCore = useWalletCore();
-  const walletData = useWalletDataByCoin(coinSymbol);
+  const walletData = useWalletDataByCoin(assetSymbol);
 
   return useMutation({
     mutationFn: async (data: SendFormData) => {

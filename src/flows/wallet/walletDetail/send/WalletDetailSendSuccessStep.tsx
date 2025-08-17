@@ -1,24 +1,24 @@
 import Lottie from "react-lottie";
 import lottieSendAnimation from "../../../../../assets/lottie/lottieSendAnimation.json";
 import { SendFormData } from "./WalletDetailSendFlowHelper";
-import { SupportedCoinOrTokenSymbol } from "@/src/library/coins/types";
-import { useCoinOrToken } from "@/src/library/coins/hooks/useCoinOrToken";
+import { AssetSymbol } from "@/src/library/coins/types";
+import { useAsset } from "@/src/library/coins/hooks/useAsset";
 import { Button } from "@/src/ui/components/Button";
 
 interface Props {
   formData: SendFormData;
-  coinSymbol: SupportedCoinOrTokenSymbol;
+  assetSymbol: AssetSymbol;
   txHash: string;
   onSendAnotherTransaction: () => void;
 }
 
 export const WalletDetailSendSuccessStep: React.FC<Props> = ({
   formData,
-  coinSymbol,
+  assetSymbol,
   txHash,
   onSendAnotherTransaction,
 }) => {
-  const coinOrToken = useCoinOrToken(coinSymbol);
+  const coinOrToken = useAsset(assetSymbol);
   const [showTransactionDetails, setShowTransactionDetails] = useState(false);
 
   if (!showTransactionDetails) {
@@ -74,7 +74,7 @@ export const WalletDetailSendSuccessStep: React.FC<Props> = ({
           }}
         >
           <div style={{ fontSize: "0.9rem", color: "var(--text)" }}>
-            Sent {formData.amount} {coinSymbol}
+            Sent {formData.amount} {assetSymbol}
           </div>
           <div
             style={{

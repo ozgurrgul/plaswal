@@ -1,15 +1,15 @@
 import React from "react";
-import { SupportedCoinOrTokenSymbol } from "../../library/coins/types";
-import { useCoinOrToken } from "../../library/coins/hooks/useCoinOrToken";
-import "./CoinOrTokenIcon.css";
+import { AssetSymbol } from "../../library/coins/types";
+import { useAsset } from "../../library/coins/hooks/useAsset";
+import "./AssetIcon.css";
 
 interface Props {
-  coinSymbol: SupportedCoinOrTokenSymbol;
+  assetSymbol: AssetSymbol;
   size: number;
 }
 
-export const CoinOrTokenIcon: React.FC<Props> = ({ coinSymbol, size }) => {
-  const coinOrToken = useCoinOrToken(coinSymbol);
+export const AssetIcon: React.FC<Props> = ({ assetSymbol, size }) => {
+  const coinOrToken = useAsset(assetSymbol);
 
   if (!coinOrToken) {
     return null;

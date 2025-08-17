@@ -3,7 +3,7 @@ import type { CoinMetadata } from "@/src/library/coins/types";
 import "./WalletItem.css";
 import { NestedDrawer } from "@/src/ui/components/Drawer";
 import { WalletDetailScreen } from "./walletDetail/WalletDetailScreen";
-import { CoinOrTokenIcon } from "@/src/ui/CoinOrTokenIcon/CoinOrTokenIcon";
+import { AssetIcon } from "@/src/ui/AssetIcon/AssetIcon";
 
 interface Props {
   coin: CoinMetadata | TokenMetadata;
@@ -17,7 +17,7 @@ export const WalletItem: React.FC<Props> = ({ coin, wallet }) => {
       description={`Your ${coin.symbol} wallet`}
       trigger={
         <div className="wallet-item" key={coin.symbol}>
-          <CoinOrTokenIcon coinSymbol={coin.symbol} size={36} />
+          <AssetIcon assetSymbol={coin.symbol} size={36} />
 
           <div className="wallet-item-content">
             <div>
@@ -32,7 +32,7 @@ export const WalletItem: React.FC<Props> = ({ coin, wallet }) => {
           </div>
         </div>
       }
-      children={<WalletDetailScreen coinSymbol={coin.symbol} />}
+      children={<WalletDetailScreen assetSymbol={coin.symbol} />}
     ></NestedDrawer>
   );
 };

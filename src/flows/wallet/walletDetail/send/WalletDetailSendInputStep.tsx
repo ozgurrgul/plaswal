@@ -1,10 +1,10 @@
 import React, { useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useCoinOrToken } from "@/src/library/coins/hooks/useCoinOrToken";
+import { useAsset } from "@/src/library/coins/hooks/useAsset";
 import {
   CoinOrTokenPlugin,
-  SupportedCoinOrTokenSymbol,
+  AssetSymbol,
 } from "@/src/library/coins/types";
 import {
   createSendFormSchema,
@@ -17,15 +17,15 @@ import FormControl from "@mui/joy/FormControl";
 import FormHelperText from "@mui/joy/FormHelperText";
 
 interface Props {
-  coinSymbol: SupportedCoinOrTokenSymbol;
+  assetSymbol: AssetSymbol;
   onContinue: (data: SendFormData) => void;
 }
 
 export const WalletDetailSendInputStep: React.FC<Props> = ({
-  coinSymbol,
+  assetSymbol,
   onContinue,
 }) => {
-  const coinOrToken = useCoinOrToken(coinSymbol) as CoinOrTokenPlugin;
+  const coinOrToken = useAsset(assetSymbol) as CoinOrTokenPlugin;
   const isValidAddressFn = coinOrToken.isValidAddress;
 
   const sendFormSchema = useMemo(
@@ -73,7 +73,7 @@ export const WalletDetailSendInputStep: React.FC<Props> = ({
 
       <div>
         <FormControl error={!!amountError}>
-          <BalanceInput coinSymbol={coinSymbol} {...register("amount")} />
+          <BalanceInput assetSymbol={assetSymbol} {...register("amount")} />
           {amountError && (
             <FormHelperText>{amountError.message}</FormHelperText>
           )}

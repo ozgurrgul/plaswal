@@ -1,8 +1,8 @@
-import { SupportedCoinOrTokenSymbol } from "../types";
+import { AssetSymbol } from "../types";
 import { useWalletData } from "./useWalletData";
 
-export const useWalletDataByCoin = (coinSymbol: SupportedCoinOrTokenSymbol) => {
+export const useWalletDataByCoin = (assetSymbol: AssetSymbol) => {
   const { data: walletData } = useWalletData();
 
-  return walletData?.[coinSymbol];
+  return walletData?.[assetSymbol];
 };

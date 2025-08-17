@@ -1,7 +1,7 @@
 import "./WalletDetailScreen.css";
 import { CopyIcon } from "@/src/ui/components/CopyIcon";
-import { SupportedCoinOrTokenSymbol } from "@/src/library/coins/types";
-import { useCoinOrToken } from "@/src/library/coins/hooks/useCoinOrToken";
+import { AssetSymbol } from "@/src/library/coins/types";
+import { useAsset } from "@/src/library/coins/hooks/useAsset";
 import { CustomDrawer } from "@/src/ui/components/Drawer";
 import { WalletDetailReceive } from "./WalletDetailReceive";
 import { useCopyText } from "@/src/hooks/useCopyText";
@@ -9,15 +9,15 @@ import { WalletDetailSendFlow } from "./send/WalletDetailSendFlow";
 import { useWalletDataByCoin } from "@/src/library/coins/hooks/useWalletDataByCoin";
 import { Button } from "@/src/ui/components/Button";
 import { SendIcon, ReceiveIcon, SwapIcon } from "@/src/ui/components/Icons";
-import { CoinOrTokenIcon } from "@/src/ui/CoinOrTokenIcon/CoinOrTokenIcon";
+import { AssetIcon } from "@/src/ui/AssetIcon/AssetIcon";
 
 interface Props {
-  coinSymbol: SupportedCoinOrTokenSymbol;
+  assetSymbol: AssetSymbol;
 }
 
-export const WalletDetailScreen: React.FC<Props> = ({ coinSymbol }) => {
-  const walletData = useWalletDataByCoin(coinSymbol);
-  const coinOrToken = useCoinOrToken(coinSymbol);
+export const WalletDetailScreen: React.FC<Props> = ({ assetSymbol }) => {
+  const walletData = useWalletDataByCoin(assetSymbol);
+  const coinOrToken = useAsset(assetSymbol);
   const { copySuccess, handleCopyText } = useCopyText();
 
   if (!walletData || !coinOrToken) {
@@ -31,10 +31,7 @@ export const WalletDetailScreen: React.FC<Props> = ({ coinSymbol }) => {
       <div className="wallet-detail-screen">
         <div className="wallet-detail-main-info">
           <div className="wallet-detail-coin-header">
-            <CoinOrTokenIcon
-              coinSymbol={coinOrToken.metadata.symbol}
-              size={24}
-            />
+            <AssetIcon assetSymbol={coinOrToken.metadata.symbol} size={24} />
             <div className="wallet-detail-coin-name">
               {coinOrToken.metadata.name}
             </div>
@@ -65,7 +62,7 @@ export const WalletDetailScreen: React.FC<Props> = ({ coinSymbol }) => {
             title="Send Crypto"
             description={`Send your ${coinOrToken.metadata.symbol} to another address`}
           >
-            <WalletDetailSendFlow coinSymbol={coinOrToken.metadata.symbol} />
+            <WalletDetailSendFlow assetSymbol={coinOrToken.metadata.symbol} />
           </CustomDrawer>
 
           <CustomDrawer

@@ -1,16 +1,16 @@
-import { SupportedCoinOrTokenSymbol } from "@/src/library/coins/types";
+import { AssetSymbol } from "@/src/library/coins/types";
 import { SendFormData } from "./WalletDetailSendFlowHelper";
 import { useSendMutation } from "@/src/library/coins/hooks/useSendMutation";
 import { Button } from "@/src/ui/components/Button";
 
 interface Props {
-  coinSymbol: SupportedCoinOrTokenSymbol;
+  assetSymbol: AssetSymbol;
   formData: SendFormData;
   onSent: (txHash: string) => void;
 }
 
 export const WalletDetailSendPreviewStep: React.FC<Props> = ({
-  coinSymbol,
+  assetSymbol,
   formData,
   onSent,
 }) => {
@@ -19,7 +19,7 @@ export const WalletDetailSendPreviewStep: React.FC<Props> = ({
     isPending,
     error,
   } = useSendMutation({
-    coinSymbol,
+    assetSymbol,
     onSuccess: onSent,
   });
 
@@ -84,7 +84,7 @@ export const WalletDetailSendPreviewStep: React.FC<Props> = ({
               color: "var(--text)",
             }}
           >
-            {formData.amount} {coinSymbol}
+            {formData.amount} {assetSymbol}
           </div>
         </div>
       </div>

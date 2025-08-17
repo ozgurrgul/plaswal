@@ -4,7 +4,7 @@ import { WalletItem } from "./WalletItem";
 import { Header } from "@/src/ui/components/Header";
 import "./WalletScreen.css";
 import { SupportedCoinSymbol, WalletData } from "@/src/library/coins";
-import { SupportedTokenSymbol } from "@/src/library/coins/types";
+import { SupportedTokenSymbol } from "@/src/library/coins";
 import { LoadingBig } from "@/src/ui/components/Loading";
 
 export const WalletScreen = () => {
@@ -24,15 +24,15 @@ export const WalletScreen = () => {
       <Header title="Your Wallet" />
       <div className="wallet-screen wallet-screen-fade-in">
         <div className="wallet-screen-coins-list">
-          {Object.keys(walletData || {}).map((coinSymbol) => {
-            const wallet = walletData?.[coinSymbol as keyof WalletData];
+          {Object.keys(walletData || {}).map((assetSymbol) => {
+            const wallet = walletData?.[assetSymbol as keyof WalletData];
             if (!wallet) {
               return null;
             }
 
             const coin = wallet.isNative
-              ? getCoin(coinSymbol as SupportedCoinSymbol)
-              : getToken(coinSymbol as SupportedTokenSymbol);
+              ? getCoin(assetSymbol as SupportedCoinSymbol)
+              : getToken(assetSymbol as SupportedTokenSymbol);
 
             if (!coin) {
               return null;
