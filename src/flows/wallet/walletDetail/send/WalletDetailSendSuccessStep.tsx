@@ -94,6 +94,11 @@ export const WalletDetailSendSuccessStep: React.FC<Props> = ({
             href={`${asset?.metadata.explorerUrl}/tx/${txHash}`}
             target="_blank"
             rel="noopener noreferrer"
+            style={{
+              fontSize: "var(--fontSize-sm)",
+              fontFamily: "monospace",
+              wordBreak: "break-all",
+            }}
           >
             {txHash}
           </a>
