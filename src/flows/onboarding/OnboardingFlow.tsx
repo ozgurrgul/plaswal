@@ -17,7 +17,7 @@ export const OnboardingFlow = () => {
   const [step, setStep] = useState<Step>("create-or-import-wallet");
 
   return (
-    <div>
+    <div style={{ color: "white" }}>
       <Stepper
         step={step}
         setStep={setStep}
