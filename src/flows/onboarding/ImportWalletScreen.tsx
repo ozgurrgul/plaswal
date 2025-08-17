@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useIsValidWalletMutation } from "../../library/walletCore/hooks/useIsValidWalletMutation";
 import { Button } from "@/src/ui/components/Button";
+import Textarea from "@mui/joy/Textarea";
 
 interface Props {
   onContinueClick: () => void;
@@ -22,11 +23,12 @@ export const ImportWalletScreen: React.FC<Props> = ({ onContinueClick }) => {
       <h4>Import Wallet</h4>
       <p>Enter your wallet mnemonic to import your wallet.</p>
       <p>
-        <textarea
+        <Textarea
           placeholder="Enter your wallet mnemonic (12, 15, 18, 21, or 24 words)"
           value={mnemonic}
           onChange={(e) => setMnemonic(e.target.value.trim())}
-          rows={3}
+          minRows={3}
+          maxRows={3}
         />
       </p>
       {isValidWalletMutation.error && (
