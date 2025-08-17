@@ -33,12 +33,6 @@ class CoinRegistryImpl implements ICoinRegistry {
     return Array.from(this.tokenPlugins.values());
   }
 
-  getTokensByParentCoin(parentCoin: SupportedCoinSymbol): BaseTokenPlugin[] {
-    return Array.from(this.tokenPlugins.values()).filter(
-      (token) => token.parentCoin === parentCoin
-    );
-  }
-
   getSupportedTokenSymbols(): string[] {
     return Array.from(this.tokenPlugins.keys());
   }

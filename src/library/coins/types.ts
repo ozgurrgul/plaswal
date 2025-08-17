@@ -1,11 +1,9 @@
 import type { WalletCore } from "@trustwallet/wallet-core";
 import { HDWallet } from "@trustwallet/wallet-core/dist/src/wallet-core";
 
-export type SupportedCoinSymbol = "BTC" | "ETH" | "SOL";
+export type SupportedCoinSymbol = "ETH" | "SOL";
 export type SupportedTokenSymbol = string;
-export type AssetSymbol =
-  | SupportedCoinSymbol
-  | SupportedTokenSymbol;
+export type AssetSymbol = SupportedCoinSymbol | SupportedTokenSymbol;
 
 export interface CoinMetadata {
   symbol: SupportedCoinSymbol;
@@ -39,7 +37,6 @@ export interface BaseCoinPlugin {
 
 export interface BaseTokenPlugin {
   readonly metadata: TokenMetadata;
-  readonly parentCoin: SupportedCoinSymbol;
 
   getAddress: BaseCoinPlugin["getAddress"];
   isValidAddress: BaseCoinPlugin["isValidAddress"];
@@ -56,7 +53,6 @@ export interface CoinRegistry {
   getToken(symbol: string): BaseTokenPlugin | undefined;
   getAllCoins(): BaseCoinPlugin[];
   getAllTokens(): BaseTokenPlugin[];
-  getTokensByParentCoin(parentCoin: SupportedCoinSymbol): BaseTokenPlugin[];
   getSupportedTokenSymbols(): string[];
 }
 

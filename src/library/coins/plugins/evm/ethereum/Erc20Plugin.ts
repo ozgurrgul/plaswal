@@ -2,7 +2,6 @@ import type { WalletCore } from "@trustwallet/wallet-core";
 import type {
   BaseCoinPlugin,
   BaseTokenPlugin,
-  SupportedCoinSymbol,
   TokenMetadata,
 } from "../../../types";
 import { HDWallet } from "@trustwallet/wallet-core/dist/src/wallet-core";
@@ -21,7 +20,6 @@ import { Buffer } from "buffer";
 
 export class Erc20Plugin implements BaseTokenPlugin {
   readonly metadata: TokenMetadata;
-  readonly parentCoin: SupportedCoinSymbol = "ETH";
   private ethereumPlugin: BaseCoinPlugin;
 
   constructor(metadata: TokenMetadata, nativeTokenPlugin: BaseCoinPlugin) {

@@ -10,7 +10,6 @@ import { getSolanaRpc } from "./SolanaHelpers";
 
 export class SplTokenPlugin implements BaseTokenPlugin {
   readonly metadata: TokenMetadata;
-  readonly parentCoin = "SOL" as const;
   private solanaPlugin: BaseCoinPlugin;
 
   constructor(metadata: TokenMetadata, solanaPlugin: BaseCoinPlugin) {
